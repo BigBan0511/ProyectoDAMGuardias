@@ -78,19 +78,11 @@ Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner l
 
 ## Contacto
 
-* Daniel Trillo Palacios
-* danitrillopa@gmail.com
-* BigBan0511  
+* Daniel Trillo Palacios, danitrillopa@gmail.com, BigBan0511  
 
+* [Tu nombre], [Tu correo electrónico], [Tu perfil de GitHub]
 
-* [Tu nombre]
-* [Tu correo electrónico]
-* [Tu perfil de GitHub]  
-  
-
-* [Tu nombre]
-* [Tu correo electrónico]
-* [Tu perfil de GitHub]
+* [Tu nombre], [Tu correo electrónico], [Tu perfil de GitHub]
 
 ## Agradecimientos
 
