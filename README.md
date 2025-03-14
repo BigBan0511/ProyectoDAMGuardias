@@ -61,7 +61,7 @@ Este programa tiene como objetivo simplificar y automatizar la gestión de horas
 
 ### Rol Administrador
 
-* **Gestión de Horarios:** Importa archivos XML desde la interfaz.
+* **Gestión de Horarios:** Crea, edita o elimina horarios.
 * **Gestión de Usuarios:** Crea, edita o elimina usuarios en la sección de administración.
 * **Gestión de Guardias:** Define rangos de fechas y horas para generar guardias.
 * **Estadísticas:** Genera informes desde la sección de estadísticas.
@@ -75,23 +75,13 @@ Este programa tiene como objetivo simplificar y automatizar la gestión de horas
 
 * **Visualización de Guardias:** Consulta el panel de guardias del día actual y la lista de profesores disponibles.
 
-## Contribución
-
-Si deseas contribuir a este proyecto, sigue estos pasos:
-
-1.  Haz un fork del repositorio.
-2.  Crea una nueva rama con tu contribución: `git checkout -b mi-contribucion`
-3.  Realiza los cambios y commitea: `git commit -m "Añade nueva funcionalidad"`
-4.  Sube los cambios a tu repositorio: `git push origin mi-contribucion`
-5.  Crea un pull request.
-
 ## Licencia
 
 Este proyecto está bajo la licencia [Nombre de la licencia].
 
 ## Contacto
 
-* [Tu nombre]
+* [Daniel Trillo Palacios]
 * [Tu correo electrónico]
 * [Tu perfil de GitHub]
 
