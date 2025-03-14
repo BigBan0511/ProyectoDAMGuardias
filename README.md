@@ -81,13 +81,11 @@ Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner l
 * Daniel Trillo Palacios
 * danitrillopa@gmail.com
 * BigBan0511
-
-
+<br>
 * [Tu nombre]
 * [Tu correo electrónico]
 * [Tu perfil de GitHub]
-
-
+<br>
 * [Tu nombre]
 * [Tu correo electrónico]
 * [Tu perfil de GitHub]
