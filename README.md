@@ -1,28 +1,30 @@
 # GuardiApp
 
-Este programa es una forma eficiente y sencilla de organizar las guardias de los centros educativos
-
 Este repositorio contiene el código fuente y la documentación del programa.
 
-## Descripción
+## Índice
 
-Este programa tiene como objetivo simplificar y automatizar la gestión de horas de guardia en los centros educativos, permitiendo a directores, profesores y personal administrativo organizarse de manera efectiva, rápida y fácil.
+1.  Descripción
+2.  Características Principales
+3.  Roles de Usuario
+4.  Requisitos
+5.  Instalación
+6.  Uso
+7.  Arquitectura (si aplica)
+8.  Licencia
+9. Contacto
+10. Bibliografía
+11. Conclusiones y Futuras Mejoras
+12. Manual de Usuario
 
-## Roles de Usuario
+## 1. Descripción
 
-* **Administrador:** Gestiona horarios, usuarios y guardias.
-* **Profesor:** Gestiona tareas en sus guardias y se asigna guardias disponibles.
-* **Sala de Profesores:** Visualiza el estado de las guardias y profesores disponibles.
+Este programa intenta simplificar y automatizar la gestión de horas de guardia en los centros educativos, permitiendo a directores, profesores y personal administrativo organizarse de manera efectiva, rápida y fácil.
 
-## Características principales (No está del todo pero más o menos cuando terminemos lo completamos mejor)
-
-* Gestión de horarios de profesores y asignación de guardias.
-* Notificaciones automáticas a profesores sobre sus guardias asignadas.
-* Generación de informes y estadísticas sobre la frecuencia de ausencias y la gestión de sustituciones.
-* Interfaz intuitiva y fácil de usar, tanto en la plataforma web como en la aplicación móvil.
-* Integración con otros sistemas de gestión escolar (opcional).
+## 2. Características principales (No está del todo pero más o menos cuando terminemos lo completamos mejor)
 
 * **Gestión de Horarios:**
+    * Creación y edición de horarios de profesores por el administrador.
     * Almacenamiento y gestión de horarios de profesores.
 * **Gestión de Usuarios:**
     * Creación, edición y eliminación de usuarios.
@@ -39,14 +41,19 @@ Este programa tiene como objetivo simplificar y automatizar la gestión de horas
 * **Sala de Profesores:**
     * Vista de guardias del día actual y profesores disponibles.
 
-## Requisitos (ni puta idea jaja)
+## 3. Roles de Usuario
+
+* **Administrador:** Gestiona horarios, usuarios y guardias.
+* **Profesor:** Gestiona tareas en sus guardias y se asigna guardias disponibles.
+* **Sala de Profesores:** Visualiza el estado de las guardias y profesores disponibles.
+
+## 4. Requisitos (ni puta idea jaja)
 
 * [Lista de requisitos de software y hardware]
 * [Lista de dependencias]
-* Lector de archivos XML.
 * Base de datos para almacenar horarios, usuarios y guardias.
 
-## Instalación (Hay que cambiarlo después)
+## 5. Instalación (Hay que cambiarlo después)
 
 1.  Clona el repositorio: `git clone https://github.com/cran/DELTD`
 2.  Instala las dependencias: `[Comandos para instalar dependencias]`
@@ -54,14 +61,14 @@ Este programa tiene como objetivo simplificar y automatizar la gestión de horas
 4.  Importa los horarios desde el archivo XML: `[Comandos para importar horarios]`
 5.  Ejecuta la aplicación: `[Comandos para ejecutar la aplicación]`
 
-## Uso (No está del todo pero más o menos cuando terminemos lo completamos mejor)
+## 6. Uso (No está del todo pero más o menos cuando terminemos lo completamos mejor)
 
 ### Rol Administrador
 
 * **Gestión de Horarios:** Crea, edita o elimina horarios.
-* **Gestión de Usuarios:** Crea, edita o elimina usuarios en la sección de administración.
-* **Gestión de Guardias:** Define rangos de fechas y horas para generar guardias.
-* **Estadísticas:** Genera informes desde la sección de estadísticas.
+* **Gestión de Usuarios:** Crea, edita o elimina usuarios.
+* **Gestión de Guardias:** Organiza las horas que cada profesor tiene de guardias y las requeridas para ello.
+* **Estadísticas:** Guarda toda la información sobre las guardias y sus profesores.
 
 ### Rol Profesor
 
@@ -72,11 +79,16 @@ Este programa tiene como objetivo simplificar y automatizar la gestión de horas
 
 * **Visualización de Guardias:** Consulta el panel de guardias del día actual y la lista de profesores disponibles.
 
-## Licencia
+## 7. Arquitectura (si aplica)
+
+* [Descripción de la arquitectura del programa]
+* [Diagrama de la arquitectura]
+
+## 8. Licencia
 
 Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner licencia si queréis).
 
-## Contacto
+## 9. Contacto
 
 * Daniel Trillo Palacios, danitrillopa@gmail.com, BigBan0511  
 
@@ -84,6 +96,20 @@ Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner l
 
 * [Tu nombre], [Tu correo electrónico], [Tu perfil de GitHub]
 
-## Agradecimientos
+## 10. Bibliografía
 
-* Gracias a todos los miembros del proyecto, estos son los dichos en el apartado de contacto, gracias a Flutterflow, Supabase y GitHub (entre otros que podemos incluir) por permitir el desarrollo del programa.
+* [Lista de recursos utilizados, incluyendo documentación de librerías, artículos, etc.]
+
+## 11. Conclusiones y Futuras Mejoras
+
+* [Conclusiones sobre el desarrollo del proyecto y posibles mejoras futuras]
+
+## 12. Manual de Usuario
+
+* [Enlace a un documento PDF o archivo Markdown con el manual de usuario detallado]
+
+**Cambios realizados:**
+
+* Se eliminó la referencia a la lectura de archivos XML en la sección de "Características Principales" y "Instalación".
+* Se modificó la descripción de la "Gestión de Horarios" para indicar que el administrador crea y edita los horarios directamente.
+* Se eliminó el requisito del lector de archivos XML en la sección de "Requisitos".
