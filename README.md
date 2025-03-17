@@ -92,7 +92,7 @@ Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner l
 
 * Daniel Trillo Palacios, danitrillopa@gmail.com, BigBan0511  
 
-* [Tu nombre], [Tu correo electrónico], [Tu perfil de GitHub]
+* Sergio Oyola Márquez, sergioyola147@gmail.com, SOyola33
 
 * [Tu nombre], [Tu correo electrónico], [Tu perfil de GitHub]
 
