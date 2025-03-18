@@ -11,16 +11,6 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  // State field(s) for crearcorreo widget.
-  FocusNode? crearcorreoFocusNode;
-  TextEditingController? crearcorreoTextController;
-  String? Function(BuildContext, String?)? crearcorreoTextControllerValidator;
-  // State field(s) for crearcontrasena widget.
-  FocusNode? crearcontrasenaFocusNode;
-  TextEditingController? crearcontrasenaTextController;
-  late bool crearcontrasenaVisibility;
-  String? Function(BuildContext, String?)?
-      crearcontrasenaTextControllerValidator;
   // State field(s) for correoInicio widget.
   FocusNode? correoInicioFocusNode;
   TextEditingController? correoInicioTextController;
@@ -34,19 +24,12 @@ class InicioSesionModel extends FlutterFlowModel<InicioSesionWidget> {
 
   @override
   void initState(BuildContext context) {
-    crearcontrasenaVisibility = false;
     contrasenaInicioVisibility = false;
   }
 
   @override
   void dispose() {
     tabBarController?.dispose();
-    crearcorreoFocusNode?.dispose();
-    crearcorreoTextController?.dispose();
-
-    crearcontrasenaFocusNode?.dispose();
-    crearcontrasenaTextController?.dispose();
-
     correoInicioFocusNode?.dispose();
     correoInicioTextController?.dispose();
 

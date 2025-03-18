@@ -2,7 +2,7 @@ import '../database.dart';
 
 class GuardiasTable extends SupabaseTable<GuardiasRow> {
   @override
-  String get tableName => 'Guardias';
+  String get tableName => 'guardias';
 
   @override
   GuardiasRow createRow(Map<String, dynamic> data) => GuardiasRow(data);
