@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
+
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -76,19 +78,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? InicioWidget() : InicioSesionWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? InicioLogeadoWidget()
+          : InicioSesionWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? InicioWidget() : InicioSesionWidget(),
-        ),
-        FFRoute(
-          name: HomePageWidget.routeName,
-          path: HomePageWidget.routePath,
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? InicioLogeadoWidget()
+              : InicioSesionWidget(),
         ),
         FFRoute(
           name: InicioSesionWidget.routeName,
@@ -96,9 +95,118 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => InicioSesionWidget(),
         ),
         FFRoute(
-          name: InicioWidget.routeName,
-          path: InicioWidget.routePath,
-          builder: (context, params) => InicioWidget(),
+          name: InicioLogeadoWidget.routeName,
+          path: InicioLogeadoWidget.routePath,
+          builder: (context, params) => InicioLogeadoWidget(),
+        ),
+        FFRoute(
+          name: CrearModifUsuariosWidget.routeName,
+          path: CrearModifUsuariosWidget.routePath,
+          builder: (context, params) => CrearModifUsuariosWidget(
+            nombre: params.getParam(
+              'nombre',
+              ParamType.String,
+            ),
+            email: params.getParam(
+              'email',
+              ParamType.String,
+            ),
+            contrasena: params.getParam(
+              'contrasena',
+              ParamType.String,
+            ),
+            rol: params.getParam(
+              'rol',
+              ParamType.String,
+            ),
+            modo: params.getParam(
+              'modo',
+              ParamType.String,
+            ),
+            id: params.getParam(
+              'id',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: MisGuardiasWidget.routeName,
+          path: MisGuardiasWidget.routePath,
+          builder: (context, params) => MisGuardiasWidget(),
+        ),
+        FFRoute(
+          name: PerfilProfeWidget.routeName,
+          path: PerfilProfeWidget.routePath,
+          builder: (context, params) => PerfilProfeWidget(),
+        ),
+        FFRoute(
+          name: AjustesWidget.routeName,
+          path: AjustesWidget.routePath,
+          builder: (context, params) => AjustesWidget(),
+        ),
+        FFRoute(
+          name: PanelControlWidget.routeName,
+          path: PanelControlWidget.routePath,
+          builder: (context, params) => PanelControlWidget(),
+        ),
+        FFRoute(
+          name: UsuariosWidget.routeName,
+          path: UsuariosWidget.routePath,
+          builder: (context, params) => UsuariosWidget(),
+        ),
+        FFRoute(
+          name: GuardiasWidget.routeName,
+          path: GuardiasWidget.routePath,
+          builder: (context, params) => GuardiasWidget(),
+        ),
+        FFRoute(
+          name: CrearModifHorarioWidget.routeName,
+          path: CrearModifHorarioWidget.routePath,
+          builder: (context, params) => CrearModifHorarioWidget(
+            tramo: params.getParam(
+              'tramo',
+              ParamType.String,
+            ),
+            modo: params.getParam(
+              'modo',
+              ParamType.String,
+            ),
+            dia: params.getParam(
+              'dia',
+              ParamType.String,
+            ),
+            profe: params.getParam(
+              'profe',
+              ParamType.String,
+            ),
+            aula: params.getParam(
+              'aula',
+              ParamType.String,
+            ),
+            hora: params.getParam(
+              'hora',
+              ParamType.String,
+            ),
+            asignatura: params.getParam(
+              'asignatura',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: HorariosWidget.routeName,
+          path: HorariosWidget.routePath,
+          builder: (context, params) => HorariosWidget(),
+        ),
+        FFRoute(
+          name: PrototipoHomePageWidget.routeName,
+          path: PrototipoHomePageWidget.routePath,
+          builder: (context, params) => PrototipoHomePageWidget(),
+        ),
+        FFRoute(
+          name: AulasWidget.routeName,
+          path: AulasWidget.routePath,
+          builder: (context, params) => AulasWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -217,6 +325,7 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -234,6 +343,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }

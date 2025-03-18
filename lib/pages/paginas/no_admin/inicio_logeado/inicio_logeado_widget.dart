@@ -5,30 +5,44 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/pages/componentes/selector_idioma/selector_idioma_widget.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'inicio_model.dart';
-export 'inicio_model.dart';
+import 'package:provider/provider.dart';
+import 'inicio_logeado_model.dart';
+export 'inicio_logeado_model.dart';
 
 /// Adapt this page to desktop and tablet
-class InicioWidget extends StatefulWidget {
-  const InicioWidget({super.key});
+class InicioLogeadoWidget extends StatefulWidget {
+  const InicioLogeadoWidget({super.key});
 
-  static String routeName = 'inicio';
-  static String routePath = '/inicio';
+  static String routeName = 'InicioLogeado';
+  static String routePath = '/inicioLogeado';
 
   @override
-  State<InicioWidget> createState() => _InicioWidgetState();
+  State<InicioLogeadoWidget> createState() => _InicioLogeadoWidgetState();
 }
 
-class _InicioWidgetState extends State<InicioWidget> {
-  late InicioModel _model;
+class _InicioLogeadoWidgetState extends State<InicioLogeadoWidget> {
+  late InicioLogeadoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => InicioModel());
+    _model = createModel(context, () => InicioLogeadoModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.usuario33 = await UsersTable().queryRows(
+        queryFn: (q) => q.eqOrNull(
+          'id_tabla',
+          currentUserUid,
+        ),
+      );
+      FFAppState().UsuarioAuth = _model.usuario33!.firstOrNull!.id;
+      safeSetState(() {});
+    });
   }
 
   @override
@@ -40,10 +54,12 @@ class _InicioWidgetState extends State<InicioWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<UsuariosRow>>(
-      future: UsuariosTable().querySingleRow(
+    context.watch<FFAppState>();
+
+    return FutureBuilder<List<UsersRow>>(
+      future: UsersTable().querySingleRow(
         queryFn: (q) => q.eqOrNull(
-          'idauth',
+          'id_tabla',
           currentUserUid,
         ),
       ),
@@ -65,10 +81,10 @@ class _InicioWidgetState extends State<InicioWidget> {
             ),
           );
         }
-        List<UsuariosRow> inicioUsuariosRowList = snapshot.data!;
+        List<UsersRow> inicioLogeadoUsersRowList = snapshot.data!;
 
-        final inicioUsuariosRow = inicioUsuariosRowList.isNotEmpty
-            ? inicioUsuariosRowList.first
+        final inicioLogeadoUsersRow = inicioLogeadoUsersRowList.isNotEmpty
+            ? inicioLogeadoUsersRowList.first
             : null;
 
         return GestureDetector(
@@ -115,7 +131,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .displaySmall
                                 .override(
-                                  fontFamily: 'Inter Tight',
+                                  fontFamily: 'Readex Pro',
                                   color: FlutterFlowTheme.of(context).primary,
                                   fontSize: 48.0,
                                   letterSpacing: 0.0,
@@ -143,7 +159,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: inicioUsuariosRow!.nombre!,
+                                  text: inicioLogeadoUsersRow!.nombre,
                                   style: GoogleFonts.getFont(
                                     'Inter Tight',
                                     color: FlutterFlowTheme.of(context)
@@ -156,7 +172,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .titleMedium
                                   .override(
-                                    fontFamily: 'Inter Tight',
+                                    fontFamily: 'Readex Pro',
                                     fontSize: 16.0,
                                     letterSpacing: 0.0,
                                   ),
@@ -175,7 +191,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 context.pushNamed(
-                                  HomePageWidget.routeName,
+                                  PrototipoHomePageWidget.routeName,
                                   extra: <String, dynamic>{
                                     kTransitionInfoKey: TransitionInfo(
                                       hasTransition: true,
@@ -497,6 +513,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                   if (responsiveVisibility(
                     context: context,
                     phone: false,
+                    tablet: false,
                   ))
                     Column(
                       mainAxisSize: MainAxisSize.max,
@@ -538,7 +555,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .displaySmall
                                                 .override(
-                                                  fontFamily: 'Inter Tight',
+                                                  fontFamily: 'Readex Pro',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primary,
@@ -573,8 +590,8 @@ class _InicioWidgetState extends State<InicioWidget> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: inicioUsuariosRow!
-                                                      .nombre!,
+                                                  text: inicioLogeadoUsersRow!
+                                                      .nombre,
                                                   style: GoogleFonts.getFont(
                                                     'Inter Tight',
                                                     color: FlutterFlowTheme.of(
@@ -590,7 +607,11 @@ class _InicioWidgetState extends State<InicioWidget> {
                                                       .getText(
                                                     'k1urpsmp' /* , comience a organizar sus gua... */,
                                                   ),
-                                                  style: TextStyle(),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
                                                 )
                                               ],
                                               style:
@@ -598,7 +619,7 @@ class _InicioWidgetState extends State<InicioWidget> {
                                                       .titleMedium
                                                       .override(
                                                         fontFamily:
-                                                            'Inter Tight',
+                                                            'Readex Pro',
                                                         fontSize: 18.0,
                                                         letterSpacing: 0.0,
                                                       ),
@@ -621,7 +642,8 @@ class _InicioWidgetState extends State<InicioWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                  HomePageWidget.routeName,
+                                                  PrototipoHomePageWidget
+                                                      .routeName,
                                                   extra: <String, dynamic>{
                                                     kTransitionInfoKey:
                                                         TransitionInfo(
