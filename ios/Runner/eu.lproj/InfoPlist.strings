@@ -1,1 +1,2 @@
-
+NSCameraUsageDescription = "Mesedez, onartu zure gailuko kamera erabiltzeko baimena zure profileko argazkia aldatzeko.";
+NSPhotoLibraryUsageDescription = "Irudi bat igotzeko sarbide-baimenak onartu behar dituzu";

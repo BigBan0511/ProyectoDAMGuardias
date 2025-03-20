@@ -24,10 +24,13 @@ class SupabaseAuthManager extends AuthManager with EmailSignInManager {
         return;
       }
       await currentUser?.delete();
-    } on AuthException catch (e) {
+    } on AuthException {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.message}')),
+        SnackBar(
+            content: Text(FFLocalizations.of(context).getText(
+          't6om783z' /* Error al autenticarse */,
+        ))),
       );
     }
   }
@@ -43,10 +46,13 @@ class SupabaseAuthManager extends AuthManager with EmailSignInManager {
         return;
       }
       await currentUser?.updateEmail(email);
-    } on AuthException catch (e) {
+    } on AuthException {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.message}')),
+        SnackBar(
+            content: Text(FFLocalizations.of(context).getText(
+          't6om783z' /* Error al autenticarse */,
+        ))),
       );
       return;
     }
@@ -66,10 +72,13 @@ class SupabaseAuthManager extends AuthManager with EmailSignInManager {
         return;
       }
       await currentUser?.updatePassword(newPassword);
-    } on AuthException catch (e) {
+    } on AuthException {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.message}')),
+        SnackBar(
+            content: Text(FFLocalizations.of(context).getText(
+          't6om783z' /* Error al autenticarse */,
+        ))),
       );
       return;
     }
@@ -87,10 +96,13 @@ class SupabaseAuthManager extends AuthManager with EmailSignInManager {
     try {
       await SupaFlow.client.auth
           .resetPasswordForEmail(email, redirectTo: redirectTo);
-    } on AuthException catch (e) {
+    } on AuthException {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.message}')),
+        SnackBar(
+            content: Text(FFLocalizations.of(context).getText(
+          't6om783z' /* Error al autenticarse */,
+        ))),
       );
       return null;
     }
@@ -144,7 +156,9 @@ class SupabaseAuthManager extends AuthManager with EmailSignInManager {
     } on AuthException catch (e) {
       final errorMsg = e.message.contains('User already registered')
           ? 'Error: The email is already in use by a different account'
-          : 'Error: ${e.message}';
+          : FFLocalizations.of(context).getText(
+              't6om783z' /* Error al autenticarse */,
+            );
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMsg)),

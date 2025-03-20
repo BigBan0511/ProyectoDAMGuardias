@@ -3,9 +3,11 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/componentes/img_perf/img_perf_widget.dart';
 import '/pages/componentes/selector_idioma/selector_idioma_widget.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'perfil_profe_model.dart';
 export 'perfil_profe_model.dart';
 
@@ -28,6 +30,8 @@ class _PerfilProfeWidgetState extends State<PerfilProfeWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PerfilProfeModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -55,10 +59,9 @@ class _PerfilProfeWidgetState extends State<PerfilProfeWidget> {
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
+                child: SpinKitFoldingCube(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 50.0,
                 ),
               ),
             ),
@@ -121,14 +124,15 @@ class _PerfilProfeWidgetState extends State<PerfilProfeWidget> {
                                     .secondaryBackground,
                                 shape: BoxShape.circle,
                               ),
-                              child:
-                                  // Podemos poner un campo en users que sea el enlace de la imagen de perfil, si quereis hacerlo os explico como
-                                  Padding(
+                              child: Padding(
                                 padding: EdgeInsets.all(2.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(50.0),
                                   child: Image.network(
-                                    'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
+                                    valueOrDefault<String>(
+                                      perfilProfeUsersRow?.imagenperfil,
+                                      'https://cdn-icons-png.flaticon.com/512/3736/3736489.png',
+                                    ),
                                     width: 100.0,
                                     height: 100.0,
                                     fit: BoxFit.cover,
@@ -320,29 +324,41 @@ class _PerfilProfeWidgetState extends State<PerfilProfeWidget> {
                                                                 context)
                                                             .languageCode ==
                                                         'es') {
-                                                      return 'Español';
+                                                      return FFLocalizations.of(
+                                                              context)
+                                                          .languageCode;
                                                     } else if (FFLocalizations
                                                                 .of(context)
                                                             .languageCode ==
                                                         'en') {
-                                                      return 'Inglés';
+                                                      return FFLocalizations.of(
+                                                              context)
+                                                          .languageCode;
                                                     } else if (FFLocalizations
                                                                 .of(context)
                                                             .languageCode ==
                                                         'zh') {
-                                                      return 'Chino';
+                                                      return FFLocalizations.of(
+                                                              context)
+                                                          .languageCode;
                                                     } else if (FFLocalizations
                                                                 .of(context)
                                                             .languageCode ==
                                                         'ru') {
-                                                      return 'Ruso';
+                                                      return FFLocalizations.of(
+                                                              context)
+                                                          .languageCode;
                                                     } else if (FFLocalizations
                                                                 .of(context)
                                                             .languageCode ==
                                                         'eu') {
-                                                      return 'Vasco';
+                                                      return FFLocalizations.of(
+                                                              context)
+                                                          .languageCode;
                                                     } else {
-                                                      return 'Español';
+                                                      return FFLocalizations.of(
+                                                              context)
+                                                          .languageCode;
                                                     }
                                                   }(),
                                                   textAlign: TextAlign.center,
@@ -363,48 +379,91 @@ class _PerfilProfeWidgetState extends State<PerfilProfeWidget> {
                                           ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 8.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 8.0, 16.0, 8.0),
-                                              child: Icon(
-                                                Icons.edit,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
+                                      Builder(
+                                        builder: (context) => Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 8.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await showDialog(
+                                                context: context,
+                                                builder: (dialogContext) {
+                                                  return Dialog(
+                                                    elevation: 0,
+                                                    insetPadding:
+                                                        EdgeInsets.zero,
+                                                    backgroundColor:
+                                                        Colors.transparent,
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                                0.0, 0.0)
+                                                            .resolve(
+                                                                Directionality.of(
+                                                                    context)),
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        FocusScope.of(
+                                                                dialogContext)
+                                                            .unfocus();
+                                                        FocusManager.instance
+                                                            .primaryFocus
+                                                            ?.unfocus();
+                                                      },
+                                                      child: ImgPerfWidget(),
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 8.0, 16.0, 8.0),
+                                                  child: Icon(
+                                                    Icons.edit,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
                                                         .secondaryText,
-                                                size: 24.0,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 0.0, 12.0, 0.0),
-                                                child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'p714mxbb' /* Cambiar imagen de perfil */,
+                                                    size: 24.0,
                                                   ),
-                                                  textAlign: TextAlign.start,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        letterSpacing: 0.0,
-                                                      ),
                                                 ),
-                                              ),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                12.0, 0.0),
+                                                    child: Text(
+                                                      FFLocalizations.of(
+                                                              context)
+                                                          .getText(
+                                                        'p714mxbb' /* Cambiar imagen de perfil */,
+                                                      ),
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                       Padding(

@@ -25,6 +25,8 @@ class _SelectorIdiomaWidgetState extends State<SelectorIdiomaWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SelectorIdiomaModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

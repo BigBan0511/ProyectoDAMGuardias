@@ -92,6 +92,8 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget>
         ],
       ),
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -634,7 +636,7 @@ class _InicioSesionWidgetState extends State<InicioSesionWidget>
                                                             }
 
                                                             context.pushNamedAuth(
-                                                                PrototipoHomePageWidget
+                                                                InicioLogeadoWidget
                                                                     .routeName,
                                                                 context
                                                                     .mounted);

@@ -6,12 +6,12 @@ import '/pages/componentes/selector_idioma/selector_idioma_widget.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'inicio_logeado_model.dart';
 export 'inicio_logeado_model.dart';
 
-/// Adapt this page to desktop and tablet
 class InicioLogeadoWidget extends StatefulWidget {
   const InicioLogeadoWidget({super.key});
 
@@ -42,7 +42,14 @@ class _InicioLogeadoWidgetState extends State<InicioLogeadoWidget> {
       );
       FFAppState().UsuarioAuth = _model.usuario33!.firstOrNull!.id;
       safeSetState(() {});
+      FFAppState().emailActual = currentUserEmail;
+      FFAppState().contraAct = 'Admin1234';
+      safeSetState(() {});
+      FFAppState().verGif = false;
+      safeSetState(() {});
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -72,10 +79,9 @@ class _InicioLogeadoWidgetState extends State<InicioLogeadoWidget> {
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
+                child: SpinKitFoldingCube(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 50.0,
                 ),
               ),
             ),
@@ -190,16 +196,21 @@ class _InicioLogeadoWidgetState extends State<InicioLogeadoWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed(
-                                  PrototipoHomePageWidget.routeName,
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType:
-                                          PageTransitionType.rightToLeft,
-                                    ),
-                                  },
-                                );
+                                if (inicioLogeadoUsersRow.rol == 'Admin') {
+                                  context
+                                      .pushNamed(PanelControlWidget.routeName);
+                                } else {
+                                  context.pushNamed(
+                                    InicioWidget.routeName,
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.rightToLeft,
+                                      ),
+                                    },
+                                  );
+                                }
                               },
                               child: Container(
                                 width: 245.0,
@@ -208,6 +219,7 @@ class _InicioLogeadoWidgetState extends State<InicioLogeadoWidget> {
                                   borderRadius: BorderRadius.circular(25.0),
                                 ),
                                 child: Row(
+                                  key: ValueKey('Row_1inr'),
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
@@ -642,8 +654,7 @@ class _InicioLogeadoWidgetState extends State<InicioLogeadoWidget> {
                                                   Colors.transparent,
                                               onTap: () async {
                                                 context.pushNamed(
-                                                  PrototipoHomePageWidget
-                                                      .routeName,
+                                                  InicioWidget.routeName,
                                                   extra: <String, dynamic>{
                                                     kTransitionInfoKey:
                                                         TransitionInfo(

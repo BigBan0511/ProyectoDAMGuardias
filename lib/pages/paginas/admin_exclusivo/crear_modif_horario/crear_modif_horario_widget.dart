@@ -1,4 +1,3 @@
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,9 +6,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/pages/componentes/confirmar_hora/confirmar_hora_widget.dart';
+import '/pages/componentes/generar/generar_widget.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'crear_modif_horario_model.dart';
 export 'crear_modif_horario_model.dart';
 
@@ -21,8 +21,8 @@ class CrearModifHorarioWidget extends StatefulWidget {
     this.dia,
     this.profe,
     this.aula,
-    this.hora,
     this.asignatura,
+    this.index,
   });
 
   final String? tramo;
@@ -30,8 +30,8 @@ class CrearModifHorarioWidget extends StatefulWidget {
   final String? dia;
   final String? profe;
   final String? aula;
-  final String? hora;
   final String? asignatura;
+  final int? index;
 
   static String routeName = 'CrearModifHorario';
   static String routePath = '/crearModifHorario';
@@ -54,6 +54,8 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
     _model.asignaturaTextController ??= TextEditingController(
         text: widget.modo == 'Modificar' ? widget.asignatura : '');
     _model.asignaturaFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -65,8 +67,6 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<AulasRow>>(
       future: FFAppState().aulasCrear(
         requestFn: () => AulasTable().queryRows(
@@ -82,10 +82,9 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
+                child: SpinKitFoldingCube(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 50.0,
                 ),
               ),
             ),
@@ -123,6 +122,7 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                     ),
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Inter',
+                          fontSize: 16.0,
                           letterSpacing: 0.0,
                         ),
                   ),
@@ -143,7 +143,7 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                       size: 24.0,
                     ),
                     onPressed: () async {
-                      context.pushNamed(PanelControlWidget.routeName);
+                      context.pushNamed(HorariosWidget.routeName);
                     },
                   ),
                 ),
@@ -153,9 +153,7 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
             ),
             body: SafeArea(
               top: true,
-              child:
-                  // Hay que hacer que no se puedan duplicar los horarios del mismo dia
-                  Form(
+              child: Form(
                 key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Column(
@@ -167,64 +165,6 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 0.0),
-                              child: FlutterFlowDropDown<String>(
-                                controller: _model.diaValueController ??=
-                                    FormFieldController<String>(
-                                  _model.diaValue ??= widget.dia,
-                                ),
-                                options: [
-                                  FFLocalizations.of(context).getText(
-                                    '414fnu7l' /* Lunes */,
-                                  ),
-                                  FFLocalizations.of(context).getText(
-                                    'rxa22axd' /* Martes */,
-                                  ),
-                                  FFLocalizations.of(context).getText(
-                                    '059oh251' /* Miércoles */,
-                                  ),
-                                  FFLocalizations.of(context).getText(
-                                    'sovns7u8' /* Jueves */,
-                                  ),
-                                  FFLocalizations.of(context).getText(
-                                    'axtesfhd' /* Viernes */,
-                                  )
-                                ],
-                                onChanged: (val) =>
-                                    safeSetState(() => _model.diaValue = val),
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 40.0,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                    ),
-                                hintText: widget.modo == 'Modificar'
-                                    ? widget.dia
-                                    : 'Día de la semana',
-                                icon: Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24.0,
-                                ),
-                                fillColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                elevation: 2.0,
-                                borderColor: Colors.transparent,
-                                borderWidth: 0.0,
-                                borderRadius: 8.0,
-                                margin: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 12.0, 0.0),
-                                hidesUnderline: true,
-                                isOverButton: false,
-                                isSearchable: false,
-                                isMultiSelect: false,
-                              ),
-                            ),
                             Align(
                               alignment: AlignmentDirectional(0.0, -1.0),
                               child: Container(
@@ -240,6 +180,75 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 10.0, 0.0, 0.0),
+                                        child: FlutterFlowDropDown<String>(
+                                          controller:
+                                              _model.diaValueController ??=
+                                                  FormFieldController<String>(
+                                            _model.diaValue ??=
+                                                widget.dia == null ||
+                                                        widget.dia == ''
+                                                    ? 'Lunes'
+                                                    : widget.dia,
+                                          ),
+                                          options: [
+                                            FFLocalizations.of(context).getText(
+                                              '414fnu7l' /* Lunes */,
+                                            ),
+                                            FFLocalizations.of(context).getText(
+                                              'rxa22axd' /* Martes */,
+                                            ),
+                                            FFLocalizations.of(context).getText(
+                                              '059oh251' /* Miércoles */,
+                                            ),
+                                            FFLocalizations.of(context).getText(
+                                              'sovns7u8' /* Jueves */,
+                                            ),
+                                            FFLocalizations.of(context).getText(
+                                              'axtesfhd' /* Viernes */,
+                                            )
+                                          ],
+                                          onChanged: (val) => safeSetState(
+                                              () => _model.diaValue = val),
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.9,
+                                          height: 40.0,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                  ),
+                                          hintText: widget.modo == 'Modificar'
+                                              ? widget.dia
+                                              : 'Día de la semana',
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          elevation: 2.0,
+                                          borderColor: Colors.transparent,
+                                          borderWidth: 0.0,
+                                          borderRadius: 8.0,
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12.0, 0.0, 12.0, 0.0),
+                                          hidesUnderline: true,
+                                          isOverButton: false,
+                                          isSearchable: false,
+                                          isMultiSelect: false,
+                                        ),
+                                      ),
                                       FutureBuilder<List<UsersRow>>(
                                         future: FFAppState().profesitos(
                                           requestFn: () =>
@@ -262,14 +271,11 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                               child: SizedBox(
                                                 width: 50.0,
                                                 height: 50.0,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                          Color>(
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                  ),
+                                                child: SpinKitFoldingCube(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 50.0,
                                                 ),
                                               ),
                                             );
@@ -301,6 +307,7 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                                     .bodyMedium
                                                     .override(
                                                       fontFamily: 'Inter',
+                                                      fontSize: 16.0,
                                                       letterSpacing: 0.0,
                                                     ),
                                             hintText:
@@ -335,8 +342,10 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                         controller:
                                             _model.aulaValueController ??=
                                                 FormFieldController<String>(
-                                          _model.aulaValue ??=
-                                              crearModifHorarioAulasRowList
+                                          _model.aulaValue ??= widget.modo ==
+                                                  'Modificar'
+                                              ? widget.aula
+                                              : crearModifHorarioAulasRowList
                                                   .firstOrNull?.codAula,
                                         ),
                                         options: crearModifHorarioAulasRowList
@@ -353,6 +362,7 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Inter',
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                             ),
                                         hintText: widget.modo == 'Modificar'
@@ -438,12 +448,14 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                                     .bodyMedium
                                                     .override(
                                                       fontFamily: 'Inter',
+                                                      fontSize: 16.0,
                                                       letterSpacing: 0.0,
                                                     ),
                                             hintText:
-                                                widget.modo == 'Modificar'
-                                                    ? widget.hora
-                                                    : 'Hora',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'slhh5s3q' /* Selector de Hora */,
+                                            ),
                                             icon: Icon(
                                               Icons.keyboard_arrow_down_rounded,
                                               color:
@@ -528,12 +540,14 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                                     .bodyMedium
                                                     .override(
                                                       fontFamily: 'Inter',
+                                                      fontSize: 16.0,
                                                       letterSpacing: 0.0,
                                                     ),
                                             hintText:
-                                                widget.modo == 'Modificar'
-                                                    ? widget.hora
-                                                    : 'Hora',
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'ptpu4q9e' /* Selector de Hora */,
+                                            ),
                                             icon: Icon(
                                               Icons.keyboard_arrow_down_rounded,
                                               color:
@@ -660,6 +674,166 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                             .asignaturaTextControllerValidator
                                             .asValidator(context),
                                       ),
+                                      if (widget.tramo == 'Diurno')
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, -1.0),
+                                          child: Builder(
+                                            builder: (context) => Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 0.0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (dialogContext) {
+                                                      return Dialog(
+                                                        elevation: 0,
+                                                        insetPadding:
+                                                            EdgeInsets.zero,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            FocusScope.of(
+                                                                    dialogContext)
+                                                                .unfocus();
+                                                            FocusManager
+                                                                .instance
+                                                                .primaryFocus
+                                                                ?.unfocus();
+                                                          },
+                                                          child: GenerarWidget(
+                                                            tramo:
+                                                                widget.tramo!,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                text:
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  'bm9uz33k' /* Generar horario */,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  height: 40.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 0.0, 16.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: Colors.white,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                  elevation: 0.0,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      if (widget.tramo == 'Vespertino')
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, -1.0),
+                                          child: Builder(
+                                            builder: (context) => Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 20.0, 0.0, 0.0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (dialogContext) {
+                                                      return Dialog(
+                                                        elevation: 0,
+                                                        insetPadding:
+                                                            EdgeInsets.zero,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            FocusScope.of(
+                                                                    dialogContext)
+                                                                .unfocus();
+                                                            FocusManager
+                                                                .instance
+                                                                .primaryFocus
+                                                                ?.unfocus();
+                                                          },
+                                                          child: GenerarWidget(
+                                                            tramo:
+                                                                widget.tramo!,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                text:
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  'zksqnwyw' /* Generar horario */,
+                                                ),
+                                                options: FFButtonOptions(
+                                                  height: 40.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          16.0, 0.0, 16.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            color: Colors.white,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                  elevation: 0.0,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                     ]
                                         .divide(SizedBox(height: 12.0))
                                         .addToEnd(SizedBox(height: 32.0)),
@@ -674,55 +848,256 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     if (widget.tramo == 'Diurno') {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return Dialog(
-                                            elevation: 0,
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(
-                                                    0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                FocusScope.of(dialogContext)
-                                                    .unfocus();
-                                                FocusManager
-                                                    .instance.primaryFocus
-                                                    ?.unfocus();
-                                              },
-                                              child: ConfirmarHoraWidget(
-                                                dia: _model.diaValue!,
-                                                hora: _model.horaDiurnoValue!,
-                                                asignatura: _model
-                                                    .asignaturaTextController
-                                                    .text,
-                                                clase: _model.aulaValue!,
-                                                nombre: _model.profeValue!,
-                                                tramo: widget.tramo!,
-                                              ),
+                                      if (_model.horaDiurnoValue != null &&
+                                          _model.horaDiurnoValue != '') {
+                                        if (widget.modo == 'Insertar') {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: ConfirmarHoraWidget(
+                                                    dia: _model.diaValue!,
+                                                    hora:
+                                                        _model.horaDiurnoValue,
+                                                    asignatura: _model
+                                                        .asignaturaTextController
+                                                        .text,
+                                                    clase: _model.aulaValue!,
+                                                    nombre: _model.profeValue!,
+                                                    tramo: widget.tramo!,
+                                                    modo: widget.modo!,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+
+                                          _model.idProfe =
+                                              await UsersTable().queryRows(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'nombre',
+                                              _model.profeValue,
                                             ),
                                           );
-                                        },
-                                      );
+                                          _model.idAula =
+                                              await AulasTable().queryRows(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'cod_aula',
+                                              _model.aulaValue,
+                                            ),
+                                          );
+                                          _model.dup =
+                                              await HorarioTable().queryRows(
+                                            queryFn: (q) => q
+                                                .eqOrNull(
+                                                  'dia',
+                                                  _model.diaValue,
+                                                )
+                                                .eqOrNull(
+                                                  'profesor',
+                                                  _model
+                                                      .idProfe?.firstOrNull?.id,
+                                                )
+                                                .eqOrNull(
+                                                  'hora',
+                                                  _model.horaDiurnoValue,
+                                                ),
+                                          );
+                                          if (_model.dup != null &&
+                                              (_model.dup)!.isNotEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'La hora introducida ya está creada',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                              ),
+                                            );
+                                            FFAppState().existeHor = true;
+                                            safeSetState(() {});
+                                          } else {
+                                            FFAppState().existeHor = false;
+                                            safeSetState(() {});
+                                            await HorarioTable().insert({
+                                              'dia': _model.diaValue,
+                                              'profesor': _model
+                                                  .idProfe?.firstOrNull?.id,
+                                              'hora': _model.horaDiurnoValue,
+                                              'clase': _model
+                                                  .idAula?.firstOrNull?.id,
+                                              'asignatura': _model
+                                                  .asignaturaTextController
+                                                  .text,
+                                              'darclase': true,
+                                            });
+                                          }
+                                        } else {
+                                          if ((widget.dia ==
+                                                  _model.diaValue) &&
+                                              (widget.profe ==
+                                                  _model.profeValue) &&
+                                              (widget.aula ==
+                                                  _model.aulaValue) &&
+                                              (widget.asignatura ==
+                                                  _model
+                                                      .asignaturaTextController
+                                                      .text)) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Ningún cambio realizado',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (dialogContext) {
+                                                return Dialog(
+                                                  elevation: 0,
+                                                  insetPadding: EdgeInsets.zero,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                              0.0, 0.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(
+                                                              dialogContext)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: ConfirmarHoraWidget(
+                                                      dia: _model.diaValue!,
+                                                      hora: _model
+                                                          .horaDiurnoValue,
+                                                      asignatura: _model
+                                                          .asignaturaTextController
+                                                          .text,
+                                                      clase: _model.aulaValue!,
+                                                      nombre:
+                                                          _model.profeValue!,
+                                                      tramo: widget.tramo!,
+                                                      modo: widget.modo!,
+                                                      index: widget.index,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
 
-                                      if (FFAppState()
-                                          .horarios
-                                          .contains(HorarioStruct(
-                                            dia: _model.diaValue,
-                                            profesor: _model.profeValue,
-                                            hora: _model.horaDiurnoValue,
-                                            clase: _model.aulaValue,
-                                            asignatura: _model
-                                                .asignaturaTextController.text,
-                                          ))) {
+                                            if (_model.dup != null &&
+                                                (_model.dup)!.isNotEmpty) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'La hora introducida ya está creada',
+                                                    style: TextStyle(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                              FFAppState().existeHor = true;
+                                              safeSetState(() {});
+                                            } else {
+                                              FFAppState().existeHor = false;
+                                              safeSetState(() {});
+                                              _model.idProfeEdit =
+                                                  await UsersTable().queryRows(
+                                                queryFn: (q) => q.eqOrNull(
+                                                  'nombre',
+                                                  _model.profeValue,
+                                                ),
+                                              );
+                                              _model.idAulaEdit =
+                                                  await AulasTable().queryRows(
+                                                queryFn: (q) => q.eqOrNull(
+                                                  'cod_aula',
+                                                  _model.aulaValue,
+                                                ),
+                                              );
+                                              await HorarioTable().update(
+                                                data: {
+                                                  'dia': _model.diaValue,
+                                                  'profesor': _model.idProfeEdit
+                                                      ?.firstOrNull?.id,
+                                                  'hora':
+                                                      _model.horaDiurnoValue,
+                                                  'clase': _model.idAulaEdit
+                                                      ?.firstOrNull?.id,
+                                                  'asignatura': _model
+                                                      .asignaturaTextController
+                                                      .text,
+                                                },
+                                                matchingRows: (rows) =>
+                                                    rows.eqOrNull(
+                                                  'id',
+                                                  widget.index,
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        }
+                                      } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'La hora introducida ya está creada',
+                                              'Seleccione una hora',
                                               style: TextStyle(
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -736,75 +1111,260 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                                     .error,
                                           ),
                                         );
-                                        FFAppState().existeHor = true;
-                                        safeSetState(() {});
-                                      } else {
-                                        FFAppState().horasAnadidas =
-                                            FFAppState().horasAnadidas + 1;
-                                        safeSetState(() {});
-                                        FFAppState().existeHor = false;
-                                        safeSetState(() {});
-                                        FFAppState()
-                                            .addToHorarios(HorarioStruct(
-                                          dia: _model.diaValue,
-                                          profesor: _model.profeValue,
-                                          hora: _model.horaDiurnoValue,
-                                          clase: _model.aulaValue,
-                                          asignatura: _model
-                                              .asignaturaTextController.text,
-                                        ));
-                                        safeSetState(() {});
                                       }
                                     } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return Dialog(
-                                            elevation: 0,
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            alignment: AlignmentDirectional(
-                                                    0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                FocusScope.of(dialogContext)
-                                                    .unfocus();
-                                                FocusManager
-                                                    .instance.primaryFocus
-                                                    ?.unfocus();
-                                              },
-                                              child: ConfirmarHoraWidget(
-                                                dia: _model.diaValue!,
-                                                hora: _model.horaVesperValue!,
-                                                asignatura: _model
-                                                    .asignaturaTextController
-                                                    .text,
-                                                clase: _model.aulaValue!,
-                                                nombre: _model.profeValue!,
-                                                tramo: widget.tramo!,
-                                              ),
+                                      if (_model.horaVesperValue != null &&
+                                          _model.horaVesperValue != '') {
+                                        if (widget.modo == 'Insertar') {
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 0,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment: AlignmentDirectional(
+                                                        0.0, 0.0)
+                                                    .resolve(Directionality.of(
+                                                        context)),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScope.of(dialogContext)
+                                                        .unfocus();
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  },
+                                                  child: ConfirmarHoraWidget(
+                                                    dia: _model.diaValue!,
+                                                    hora:
+                                                        _model.horaDiurnoValue,
+                                                    asignatura: _model
+                                                        .asignaturaTextController
+                                                        .text,
+                                                    clase: _model.aulaValue!,
+                                                    nombre: _model.profeValue!,
+                                                    tramo: widget.tramo!,
+                                                    modo: widget.modo!,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+
+                                          _model.idProfeVesp =
+                                              await UsersTable().queryRows(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'nombre',
+                                              _model.profeValue,
                                             ),
                                           );
-                                        },
-                                      );
+                                          _model.idAulaVesp =
+                                              await AulasTable().queryRows(
+                                            queryFn: (q) => q.eqOrNull(
+                                              'cod_aula',
+                                              _model.aulaValue,
+                                            ),
+                                          );
+                                          _model.dupVesp =
+                                              await HorarioTable().queryRows(
+                                            queryFn: (q) => q
+                                                .eqOrNull(
+                                                  'dia',
+                                                  _model.diaValue,
+                                                )
+                                                .eqOrNull(
+                                                  'profesor',
+                                                  _model.idProfeVesp
+                                                      ?.firstOrNull?.id,
+                                                )
+                                                .eqOrNull(
+                                                  'hora',
+                                                  _model.horaVesperValue,
+                                                ),
+                                          );
+                                          if (_model.dupVesp != null &&
+                                              (_model.dupVesp)!.isNotEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'La hora introducida ya está creada',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .error,
+                                              ),
+                                            );
+                                            FFAppState().existeHor = true;
+                                            safeSetState(() {});
+                                          } else {
+                                            FFAppState().existeHor = false;
+                                            safeSetState(() {});
+                                            await HorarioTable().insert({
+                                              'dia': _model.diaValue,
+                                              'profesor': _model
+                                                  .idProfeVesp?.firstOrNull?.id,
+                                              'hora': _model.horaVesperValue,
+                                              'clase': _model
+                                                  .idAulaVesp?.firstOrNull?.id,
+                                              'asignatura': _model
+                                                  .asignaturaTextController
+                                                  .text,
+                                              'darclase': true,
+                                            });
+                                          }
+                                        } else {
+                                          if ((widget.dia ==
+                                                  _model.diaValue) &&
+                                              (widget.profe ==
+                                                  _model.profeValue) &&
+                                              (widget.aula ==
+                                                  _model.aulaValue) &&
+                                              (widget.asignatura ==
+                                                  _model
+                                                      .asignaturaTextController
+                                                      .text)) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Ningún cambio realizado',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (dialogContext) {
+                                                return Dialog(
+                                                  elevation: 0,
+                                                  insetPadding: EdgeInsets.zero,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  alignment:
+                                                      AlignmentDirectional(
+                                                              0.0, 0.0)
+                                                          .resolve(
+                                                              Directionality.of(
+                                                                  context)),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      FocusScope.of(
+                                                              dialogContext)
+                                                          .unfocus();
+                                                      FocusManager
+                                                          .instance.primaryFocus
+                                                          ?.unfocus();
+                                                    },
+                                                    child: ConfirmarHoraWidget(
+                                                      dia: _model.diaValue!,
+                                                      hora: _model
+                                                          .horaDiurnoValue,
+                                                      asignatura: _model
+                                                          .asignaturaTextController
+                                                          .text,
+                                                      clase: _model.aulaValue!,
+                                                      nombre:
+                                                          _model.profeValue!,
+                                                      tramo: widget.tramo!,
+                                                      modo: widget.modo!,
+                                                      index: widget.index,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            );
 
-                                      if (FFAppState()
-                                          .horarios
-                                          .contains(HorarioStruct(
-                                            dia: _model.diaValue,
-                                            profesor: _model.profeValue,
-                                            hora: _model.horaVesperValue,
-                                            clase: _model.aulaValue,
-                                            asignatura: _model
-                                                .asignaturaTextController.text,
-                                          ))) {
+                                            if (_model.dup != null &&
+                                                (_model.dup)!.isNotEmpty) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'La hora introducida ya está creada',
+                                                    style: TextStyle(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryText,
+                                                    ),
+                                                  ),
+                                                  duration: Duration(
+                                                      milliseconds: 4000),
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .error,
+                                                ),
+                                              );
+                                              FFAppState().existeHor = true;
+                                              safeSetState(() {});
+                                            } else {
+                                              FFAppState().existeHor = false;
+                                              safeSetState(() {});
+                                              _model.idProfeEditVesp =
+                                                  await UsersTable().queryRows(
+                                                queryFn: (q) => q.eqOrNull(
+                                                  'nombre',
+                                                  _model.profeValue,
+                                                ),
+                                              );
+                                              _model.idAulaEditVesp =
+                                                  await AulasTable().queryRows(
+                                                queryFn: (q) => q.eqOrNull(
+                                                  'cod_aula',
+                                                  _model.aulaValue,
+                                                ),
+                                              );
+                                              await HorarioTable().update(
+                                                data: {
+                                                  'dia': _model.diaValue,
+                                                  'profesor': _model
+                                                      .idProfeEditVesp
+                                                      ?.firstOrNull
+                                                      ?.id,
+                                                  'hora':
+                                                      _model.horaVesperValue,
+                                                  'clase': _model.idAulaEditVesp
+                                                      ?.firstOrNull?.id,
+                                                  'asignatura': _model
+                                                      .asignaturaTextController
+                                                      .text,
+                                                },
+                                                matchingRows: (rows) =>
+                                                    rows.eqOrNull(
+                                                  'id',
+                                                  widget.index,
+                                                ),
+                                              );
+                                            }
+                                          }
+                                        }
+                                      } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'La hora introducida ya está creada',
+                                              'Seleccione una hora',
                                               style: TextStyle(
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -818,29 +1378,13 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                                                     .error,
                                           ),
                                         );
-                                        FFAppState().existeHor = true;
-                                        safeSetState(() {});
-                                      } else {
-                                        FFAppState().horasAnadidas =
-                                            FFAppState().horasAnadidas + 1;
-                                        safeSetState(() {});
-                                        FFAppState().existeHor = false;
-                                        safeSetState(() {});
-                                        FFAppState()
-                                            .addToHorarios(HorarioStruct(
-                                          dia: _model.diaValue,
-                                          profesor: _model.profeValue,
-                                          hora: _model.horaVesperValue,
-                                          clase: _model.aulaValue,
-                                          asignatura: _model
-                                              .asignaturaTextController.text,
-                                        ));
-                                        safeSetState(() {});
                                       }
                                     }
+
+                                    safeSetState(() {});
                                   },
                                   text: FFLocalizations.of(context).getText(
-                                    'jezz2xw5' /* Añadir hora */,
+                                    '4yj2uaoo' /* Añadir hora */,
                                   ),
                                   options: FFButtonOptions(
                                     height: 40.0,
@@ -875,12 +1419,9 @@ class _CrearModifHorarioWidgetState extends State<CrearModifHorarioWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 12.0, 16.0, 12.0),
                         child: FFButtonWidget(
-                          onPressed: (FFAppState().horasAnadidas < 1)
-                              ? null
-                              : () async {
-                                  context
-                                      .pushNamed(PanelControlWidget.routeName);
-                                },
+                          onPressed: () async {
+                            context.pushNamed(PanelControlWidget.routeName);
+                          },
                           text: FFLocalizations.of(context).getText(
                             'ucix0b8n' /* Confirmar */,
                           ),

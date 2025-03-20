@@ -1,1 +1,2 @@
-
+NSCameraUsageDescription = "Please accept permission to use your device's camera to change your profile picture.";
+NSPhotoLibraryUsageDescription = "To upload an image you must accept the access permissions";

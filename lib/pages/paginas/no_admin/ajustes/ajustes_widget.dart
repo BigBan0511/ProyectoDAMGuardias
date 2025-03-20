@@ -25,6 +25,8 @@ class _AjustesWidgetState extends State<AjustesWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => AjustesModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -355,7 +357,7 @@ class _AjustesWidgetState extends State<AjustesWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
             child: Text(
               FFLocalizations.of(context).getText(
-                'zofc3ctt' /* v0.0.1 */,
+                'zofc3ctt' /* v1.0.0 */,
               ),
               style: FlutterFlowTheme.of(context).labelMedium.override(
                     fontFamily: 'Inter',

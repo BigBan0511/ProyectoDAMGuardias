@@ -1,6 +1,9 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/componentes/menu_telef/menu_telef_widget.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'panel_control_model.dart';
@@ -25,6 +28,8 @@ class _PanelControlWidgetState extends State<PanelControlWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PanelControlModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -52,10 +57,37 @@ class _PanelControlWidgetState extends State<PanelControlWidget> {
             size: 25.0,
           ),
           onPressed: () async {
-            context.pushNamed(PrototipoHomePageWidget.routeName);
+            context.pushNamed(InicioWidget.routeName);
           },
         ),
-        actions: [],
+        actions: [
+          Builder(
+            builder: (context) => FlutterFlowIconButton(
+              borderRadius: 8.0,
+              buttonSize: 40.0,
+              icon: Icon(
+                Icons.menu,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 24.0,
+              ),
+              onPressed: () async {
+                await showDialog(
+                  context: context,
+                  builder: (dialogContext) {
+                    return Dialog(
+                      elevation: 0,
+                      insetPadding: EdgeInsets.zero,
+                      backgroundColor: Colors.transparent,
+                      alignment: AlignmentDirectional(0.0, 0.0)
+                          .resolve(Directionality.of(context)),
+                      child: MenuTelefWidget(),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
         centerTitle: false,
         elevation: 0.0,
       ),
@@ -206,31 +238,99 @@ class _PanelControlWidgetState extends State<PanelControlWidget> {
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(),
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          FFLocalizations.of(context).getText(
-                            'bftka7q9' /* Guardias */,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    _model.aa = await UsersTable().queryRows(
+                      queryFn: (q) => q.eqOrNull(
+                        'id_tabla',
+                        currentUserUid,
+                      ),
+                    );
+
+                    context.pushNamed(
+                      GuardiasWidget.routeName,
+                      queryParameters: {
+                        'tipoUsuario': serializeParam(
+                          _model.aa?.firstOrNull?.rol,
+                          ParamType.String,
+                        ),
+                      }.withoutNulls,
+                    );
+
+                    safeSetState(() {});
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(),
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'bftka7q9' /* Guardias */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                           ),
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        Icon(
-                          Icons.chevron_right_rounded,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 24.0,
-                        ),
-                      ],
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 1.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed(EstadisticasWidget.routeName);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(),
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            FFLocalizations.of(context).getText(
+                              'ys1wfgfl' /* Estadísticas */,
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .titleLarge
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                          Icon(
+                            Icons.chevron_right_rounded,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 24.0,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

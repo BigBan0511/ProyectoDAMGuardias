@@ -3,12 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/backend/schema/structs/index.dart';
-
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 import '/index.dart';
@@ -73,20 +70,21 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
+GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
+    GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? InicioLogeadoWidget()
+          ? entryPage ?? InicioLogeadoWidget()
           : InicioSesionWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? InicioLogeadoWidget()
+              ? entryPage ?? InicioLogeadoWidget()
               : InicioSesionWidget(),
         ),
         FFRoute(
@@ -130,11 +128,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: MisGuardiasWidget.routeName,
-          path: MisGuardiasWidget.routePath,
-          builder: (context, params) => MisGuardiasWidget(),
-        ),
-        FFRoute(
           name: PerfilProfeWidget.routeName,
           path: PerfilProfeWidget.routePath,
           builder: (context, params) => PerfilProfeWidget(),
@@ -153,11 +146,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: UsuariosWidget.routeName,
           path: UsuariosWidget.routePath,
           builder: (context, params) => UsuariosWidget(),
-        ),
-        FFRoute(
-          name: GuardiasWidget.routeName,
-          path: GuardiasWidget.routePath,
-          builder: (context, params) => GuardiasWidget(),
         ),
         FFRoute(
           name: CrearModifHorarioWidget.routeName,
@@ -183,13 +171,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'aula',
               ParamType.String,
             ),
-            hora: params.getParam(
-              'hora',
-              ParamType.String,
-            ),
             asignatura: params.getParam(
               'asignatura',
               ParamType.String,
+            ),
+            index: params.getParam(
+              'index',
+              ParamType.int,
             ),
           ),
         ),
@@ -199,14 +187,69 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HorariosWidget(),
         ),
         FFRoute(
-          name: PrototipoHomePageWidget.routeName,
-          path: PrototipoHomePageWidget.routePath,
-          builder: (context, params) => PrototipoHomePageWidget(),
+          name: InicioWidget.routeName,
+          path: InicioWidget.routePath,
+          builder: (context, params) => InicioWidget(
+            idHorario: params.getParam(
+              'idHorario',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
           name: AulasWidget.routeName,
           path: AulasWidget.routePath,
           builder: (context, params) => AulasWidget(),
+        ),
+        FFRoute(
+          name: GuardiasWidget.routeName,
+          path: GuardiasWidget.routePath,
+          builder: (context, params) => GuardiasWidget(
+            tipoUsuario: params.getParam(
+              'tipoUsuario',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: CrearModifGuardiaWidget.routeName,
+          path: CrearModifGuardiaWidget.routePath,
+          builder: (context, params) => CrearModifGuardiaWidget(
+            tramo: params.getParam(
+              'tramo',
+              ParamType.String,
+            ),
+            modo: params.getParam(
+              'modo',
+              ParamType.String,
+            ),
+            dia: params.getParam(
+              'dia',
+              ParamType.String,
+            ),
+            profe: params.getParam(
+              'profe',
+              ParamType.String,
+            ),
+            aula: params.getParam(
+              'aula',
+              ParamType.String,
+            ),
+            index: params.getParam(
+              'index',
+              ParamType.int,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: EstadisticasWidget.routeName,
+          path: EstadisticasWidget.routePath,
+          builder: (context, params) => EstadisticasWidget(),
+        ),
+        FFRoute(
+          name: GuardiasProfesWidget.routeName,
+          path: GuardiasProfesWidget.routePath,
+          builder: (context, params) => GuardiasProfesWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -325,7 +368,6 @@ class FFParameters {
     String paramName,
     ParamType type, {
     bool isList = false,
-    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -343,7 +385,6 @@ class FFParameters {
       param,
       type,
       isList,
-      structBuilder: structBuilder,
     );
   }
 }
@@ -391,15 +432,11 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: Colors.white,
+                  child: Image.asset(
+                    'assets/images/Gemini_Generated_Image_rzaiv8rzaiv8rzai.jpeg',
+                    fit: BoxFit.contain,
                   ),
                 )
               : page;
