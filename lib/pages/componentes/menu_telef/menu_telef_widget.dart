@@ -328,78 +328,6 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed(AjustesWidget.routeName);
-                        },
-                        child: AnimatedContainer(
-                          duration: Duration(milliseconds: 150),
-                          curve: Curves.easeInOut,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: _model.mouseRegionHovered2
-                                ? Color(0xFFF67575)
-                                : FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 8.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      12.0, 0.0, 0.0, 0.0),
-                                  child: Icon(
-                                    Icons.settings_outlined,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      FFLocalizations.of(context).getText(
-                                        'zvp5rkzv' /* Ajustes */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered2 = true);
-                      }),
-                      onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered2 = false);
-                      }),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 4.0),
-                    child: MouseRegion(
-                      opaque: false,
-                      cursor: SystemMouseCursors.basic ?? MouseCursor.defer,
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
                           context.pushNamed(HorariosWidget.routeName);
                         },
                         child: AnimatedContainer(
@@ -407,7 +335,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           curve: Curves.easeInOut,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: _model.mouseRegionHovered3
+                            color: _model.mouseRegionHovered2
                                 ? Color(0xFFF67575)
                                 : FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -453,10 +381,10 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         ),
                       ),
                       onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered3 = true);
+                        safeSetState(() => _model.mouseRegionHovered2 = true);
                       }),
                       onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered3 = false);
+                        safeSetState(() => _model.mouseRegionHovered2 = false);
                       }),
                     ),
                   ),
@@ -479,7 +407,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           curve: Curves.easeInOut,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: _model.mouseRegionHovered4
+                            color: _model.mouseRegionHovered3
                                 ? Color(0xFFF67575)
                                 : FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -525,10 +453,10 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         ),
                       ),
                       onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered4 = true);
+                        safeSetState(() => _model.mouseRegionHovered3 = true);
                       }),
                       onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered4 = false);
+                        safeSetState(() => _model.mouseRegionHovered3 = false);
                       }),
                     ),
                   ),
@@ -559,7 +487,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           curve: Curves.easeInOut,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: _model.mouseRegionHovered5
+                            color: _model.mouseRegionHovered4
                                 ? Color(0xFFF67575)
                                 : FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -605,10 +533,10 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         ),
                       ),
                       onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered5 = true);
+                        safeSetState(() => _model.mouseRegionHovered4 = true);
                       }),
                       onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered5 = false);
+                        safeSetState(() => _model.mouseRegionHovered4 = false);
                       }),
                     ),
                   ),
@@ -632,7 +560,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                             curve: Curves.easeInOut,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: _model.mouseRegionHovered6
+                              color: _model.mouseRegionHovered5
                                   ? Color(0xFFF67575)
                                   : FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -678,11 +606,11 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           ),
                         ),
                         onEnter: ((event) async {
-                          safeSetState(() => _model.mouseRegionHovered6 = true);
+                          safeSetState(() => _model.mouseRegionHovered5 = true);
                         }),
                         onExit: ((event) async {
                           safeSetState(
-                              () => _model.mouseRegionHovered6 = false);
+                              () => _model.mouseRegionHovered5 = false);
                         }),
                       ),
                     ),
@@ -892,7 +820,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           curve: Curves.easeInOut,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: _model.mouseRegionHovered7
+                            color: _model.mouseRegionHovered6
                                 ? Color(0xFFF67575)
                                 : FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -938,10 +866,10 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         ),
                       ),
                       onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered7 = true);
+                        safeSetState(() => _model.mouseRegionHovered6 = true);
                       }),
                       onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered7 = false);
+                        safeSetState(() => _model.mouseRegionHovered6 = false);
                       }),
                     ),
                   ),

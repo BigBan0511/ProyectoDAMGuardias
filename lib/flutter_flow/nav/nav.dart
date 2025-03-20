@@ -133,11 +133,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => PerfilProfeWidget(),
         ),
         FFRoute(
-          name: AjustesWidget.routeName,
-          path: AjustesWidget.routePath,
-          builder: (context, params) => AjustesWidget(),
-        ),
-        FFRoute(
           name: PanelControlWidget.routeName,
           path: PanelControlWidget.routePath,
           builder: (context, params) => PanelControlWidget(),

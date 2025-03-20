@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -102,6 +103,18 @@ class _ElegirTramoHorarioWidgetState extends State<ElegirTramoHorarioWidget>
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                FlutterFlowIconButton(
+                  borderRadius: 8.0,
+                  buttonSize: 40.0,
+                  icon: Icon(
+                    Icons.close,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 24.0,
+                  ),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                ),
                 Expanded(
                   child: InkWell(
                     splashColor: Colors.transparent,
@@ -200,105 +213,114 @@ class _ElegirTramoHorarioWidgetState extends State<ElegirTramoHorarioWidget>
                     ),
                   ),
                 ),
-                Expanded(
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      context.pushNamed(
-                        CrearModifHorarioWidget.routeName,
-                        queryParameters: {
-                          'tramo': serializeParam(
-                            'Vespertino',
-                            ParamType.String,
-                          ),
-                          'modo': serializeParam(
-                            widget.modo,
-                            ParamType.String,
-                          ),
-                          'dia': serializeParam(
-                            widget.dia,
-                            ParamType.String,
-                          ),
-                          'profe': serializeParam(
-                            widget.profesor,
-                            ParamType.String,
-                          ),
-                          'aula': serializeParam(
-                            widget.aula,
-                            ParamType.String,
-                          ),
-                          'asignatura': serializeParam(
-                            widget.asignatura,
-                            ParamType.String,
-                          ),
-                          'index': serializeParam(
-                            widget.index,
-                            ParamType.int,
-                          ),
-                        }.withoutNulls,
-                      );
-                    },
-                    child: Container(
-                      width: 115.0,
-                      height: 100.0,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? FlutterFlowTheme.of(context).secondaryBackground
-                            : FlutterFlowTheme.of(context).primaryBackground,
-                        borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(
-                          color: valueOrDefault<Color>(
-                            Theme.of(context).brightness == Brightness.dark
-                                ? FlutterFlowTheme.of(context).alternate
-                                : FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                            FlutterFlowTheme.of(context).primaryBackground,
-                          ),
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.nightlight_round,
-                            color: Theme.of(context).brightness ==
-                                    Brightness.dark
-                                ? FlutterFlowTheme.of(context).primaryText
-                                : FlutterFlowTheme.of(context).secondaryText,
-                            size: 16.0,
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                4.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'si8hkbr3' /* Vespertino */,
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            CrearModifHorarioWidget.routeName,
+                            queryParameters: {
+                              'tramo': serializeParam(
+                                'Vespertino',
+                                ParamType.String,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? FlutterFlowTheme.of(context)
-                                            .primaryText
-                                        : FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                    letterSpacing: 0.0,
-                                  ),
+                              'modo': serializeParam(
+                                widget.modo,
+                                ParamType.String,
+                              ),
+                              'dia': serializeParam(
+                                widget.dia,
+                                ParamType.String,
+                              ),
+                              'profe': serializeParam(
+                                widget.profesor,
+                                ParamType.String,
+                              ),
+                              'aula': serializeParam(
+                                widget.aula,
+                                ParamType.String,
+                              ),
+                              'asignatura': serializeParam(
+                                widget.asignatura,
+                                ParamType.String,
+                              ),
+                              'index': serializeParam(
+                                widget.index,
+                                ParamType.int,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Container(
+                          width: 115.0,
+                          height: 100.0,
+                          decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? FlutterFlowTheme.of(context)
+                                        .secondaryBackground
+                                    : FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                            borderRadius: BorderRadius.circular(10.0),
+                            border: Border.all(
+                              color: valueOrDefault<Color>(
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? FlutterFlowTheme.of(context).alternate
+                                    : FlutterFlowTheme.of(context)
+                                        .primaryBackground,
+                                FlutterFlowTheme.of(context).primaryBackground,
+                              ),
+                              width: 1.0,
                             ),
                           ),
-                        ],
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.nightlight_round,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? FlutterFlowTheme.of(context).primaryText
+                                    : FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                size: 16.0,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    4.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'si8hkbr3' /* Vespertino */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? FlutterFlowTheme.of(context)
+                                                .primaryText
+                                            : FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ).animateOnActionTrigger(
+                        animationsMap['containerOnActionTriggerAnimation']!,
                       ),
                     ),
-                  ).animateOnActionTrigger(
-                    animationsMap['containerOnActionTriggerAnimation']!,
-                  ),
+                  ],
                 ),
               ],
             ),

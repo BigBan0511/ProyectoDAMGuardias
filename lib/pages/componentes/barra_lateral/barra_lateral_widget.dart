@@ -3,6 +3,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -228,11 +229,6 @@ class _BarraLateralWidgetState extends State<BarraLateralWidget>
                                       ),
                                     ),
                                   ),
-                                  Icon(
-                                    Icons.notifications_none,
-                                    color: FlutterFlowTheme.of(context).info,
-                                    size: 28.0,
-                                  ),
                                 ],
                               ),
                             ),
@@ -243,169 +239,14 @@ class _BarraLateralWidgetState extends State<BarraLateralWidget>
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).accent1,
-                          borderRadius: BorderRadius.circular(12.0),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 12.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 12.0, 12.0, 12.0),
-                                child: Container(
-                                  width: 4.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).accent1,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                ),
-                              ),
-                              Icon(
-                                Icons.person,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 28.0,
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'v09odcg8' /* Perfil */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).accent1,
-                          borderRadius: BorderRadius.circular(12.0),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 12.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 12.0, 12.0, 12.0),
-                                child: Container(
-                                  width: 4.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).accent1,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                ),
-                              ),
-                              Icon(
-                                Icons.forum_rounded,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 28.0,
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'ghuzykvk' /* Mis guardias */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).accent1,
-                          borderRadius: BorderRadius.circular(12.0),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 0.0, 12.0, 0.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 12.0, 12.0, 12.0),
-                                child: Container(
-                                  width: 4.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context).accent1,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                ),
-                              ),
-                              Icon(
-                                Icons.grain,
-                                color: FlutterFlowTheme.of(context).info,
-                                size: 28.0,
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'ljg2gaom' /* Ajustes */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (sideNav08UsersRow.rol == 'Admin')
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 12.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(PerfilProfeWidget.routeName);
+                        },
                         child: Container(
                           width: double.infinity,
                           height: 50.0,
@@ -434,7 +275,7 @@ class _BarraLateralWidgetState extends State<BarraLateralWidget>
                                   ),
                                 ),
                                 Icon(
-                                  Icons.remove_red_eye,
+                                  Icons.person,
                                   color: FlutterFlowTheme.of(context).info,
                                   size: 28.0,
                                 ),
@@ -443,14 +284,12 @@ class _BarraLateralWidgetState extends State<BarraLateralWidget>
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
-                                      'j9s8l5ns' /* Panel de control */,
+                                      'v09odcg8' /* Perfil */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
                                           fontFamily: 'Inter',
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -460,15 +299,23 @@ class _BarraLateralWidgetState extends State<BarraLateralWidget>
                           ),
                         ),
                       ),
-                    if (sideNav08UsersRow.rol == 'admin')
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 12.0),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(HorariosWidget.routeName);
+                        },
                         child: Container(
                           width: double.infinity,
                           height: 50.0,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).error,
+                            color: FlutterFlowTheme.of(context).accent1,
                             borderRadius: BorderRadius.circular(12.0),
                             shape: BoxShape.rectangle,
                           ),
@@ -492,7 +339,7 @@ class _BarraLateralWidgetState extends State<BarraLateralWidget>
                                   ),
                                 ),
                                 Icon(
-                                  Icons.logout_sharp,
+                                  Icons.perm_contact_cal_outlined,
                                   color: FlutterFlowTheme.of(context).info,
                                   size: 28.0,
                                 ),
@@ -501,19 +348,295 @@ class _BarraLateralWidgetState extends State<BarraLateralWidget>
                                       12.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
-                                      '8jts9kb9' /* Cerrar Sesión */,
+                                      'ljg2gaom' /* Horarios */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
                                           fontFamily: 'Inter',
-                                          color:
-                                              FlutterFlowTheme.of(context).info,
                                           letterSpacing: 0.0,
                                         ),
                                   ),
                                 ),
                               ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(GuardiasProfesWidget.routeName);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).accent1,
+                            borderRadius: BorderRadius.circular(12.0),
+                            shape: BoxShape.rectangle,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 12.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 12.0, 12.0),
+                                  child: Container(
+                                    width: 4.0,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          FlutterFlowTheme.of(context).accent1,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.calendar_month,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 28.0,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      '296d2zci' /* Guardias disponibles */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            GuardiasWidget.routeName,
+                            queryParameters: {
+                              'tipoUsuario': serializeParam(
+                                sideNav08UsersRow.rol,
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).accent1,
+                            borderRadius: BorderRadius.circular(12.0),
+                            shape: BoxShape.rectangle,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 12.0, 0.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 12.0, 12.0, 12.0),
+                                  child: Container(
+                                    width: 4.0,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          FlutterFlowTheme.of(context).accent1,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.calendar_today,
+                                  color: FlutterFlowTheme.of(context).info,
+                                  size: 28.0,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'yivqj27w' /* Guardias generales */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    if (sideNav08UsersRow.rol == 'Admin')
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 12.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed(PanelControlWidget.routeName);
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).accent1,
+                              borderRadius: BorderRadius.circular(12.0),
+                              shape: BoxShape.rectangle,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 12.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 12.0, 12.0, 12.0),
+                                    child: Container(
+                                      width: 4.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.remove_red_eye,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 28.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'j9s8l5ns' /* Panel de control */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (sideNav08UsersRow.rol == 'admin')
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 0.0, 16.0, 12.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            GoRouter.of(context).prepareAuthEvent();
+                            await authManager.signOut();
+                            GoRouter.of(context).clearRedirectLocation();
+
+                            context.goNamedAuth(
+                                InicioSesionWidget.routeName, context.mounted);
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).error,
+                              borderRadius: BorderRadius.circular(12.0),
+                              shape: BoxShape.rectangle,
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 12.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 12.0, 12.0, 12.0),
+                                    child: Container(
+                                      width: 4.0,
+                                      height: 100.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.logout_sharp,
+                                    color: FlutterFlowTheme.of(context).info,
+                                    size: 28.0,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '8jts9kb9' /* Cerrar Sesión */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: FlutterFlowTheme.of(context)
+                                                .info,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),

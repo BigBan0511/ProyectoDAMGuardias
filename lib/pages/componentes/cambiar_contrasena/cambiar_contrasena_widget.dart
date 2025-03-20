@@ -1,4 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -78,14 +79,34 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      '9rpfabu9' /* Cambiar contraseña */,
-                    ),
-                    style: FlutterFlowTheme.of(context).headlineMedium.override(
-                          fontFamily: 'Readex Pro',
-                          letterSpacing: 0.0,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText(
+                          '9rpfabu9' /* Cambiar contraseña */,
                         ),
+                        style: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                      FlutterFlowIconButton(
+                        borderRadius: 8.0,
+                        buttonSize: 40.0,
+                        icon: Icon(
+                          Icons.close,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
