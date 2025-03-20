@@ -55,7 +55,7 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 
 ## 5. Instalación (Hay que cambiarlo después)
 
-1.  Descargar el [APK]()
+1.  Descargar el [APK](https://github.com/BigBan0511/ProyectoDAMGuardias/releases/tag/Tag1)
 2.  Iniciar sesión con las credenciales proporcionadas por el administrador.
 
 ## 6. Uso
