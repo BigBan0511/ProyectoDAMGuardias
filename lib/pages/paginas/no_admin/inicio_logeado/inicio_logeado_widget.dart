@@ -653,18 +653,26 @@ class _InicioLogeadoWidgetState extends State<InicioLogeadoWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
-                                                context.pushNamed(
-                                                  InicioWidget.routeName,
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .rightToLeft,
-                                                    ),
-                                                  },
-                                                );
+                                                if (inicioLogeadoUsersRow
+                                                        .rol ==
+                                                    'Admin') {
+                                                  context.pushNamed(
+                                                      PanelControlWidget
+                                                          .routeName);
+                                                } else {
+                                                  context.pushNamed(
+                                                    InicioWidget.routeName,
+                                                    extra: <String, dynamic>{
+                                                      kTransitionInfoKey:
+                                                          TransitionInfo(
+                                                        hasTransition: true,
+                                                        transitionType:
+                                                            PageTransitionType
+                                                                .rightToLeft,
+                                                      ),
+                                                    },
+                                                  );
+                                                }
                                               },
                                               child: Container(
                                                 width: 245.0,
