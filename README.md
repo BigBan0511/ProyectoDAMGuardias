@@ -111,40 +111,41 @@ Este proyecto está bajo la licencia de código abierto.
 <br>
 ![Versiones](Versiones.png)
 
-**Tests**
-# **Pruebas Unitarias para `generar_horario_vesper`**
+## 11. **Tests**
 
-## **Objetivo**
-Verificar que la función genera horarios aleatorios correctamente para profesores, asegurando que los datos insertados sean válidos y consistentes.
+### **Pruebas Unitarias para `generar_horario_vesper`**  
 
-## **Escenarios de Prueba**
-- **Inserción de Datos:** Comprobar que se insertan exactamente 25 registros por profesor (5 horas por 5 días).  
-- **Múltiples Profesores:** Confirmar que la función puede generar horarios para distintos profesores sin mezclar datos.  
-- **Rango de Clases Aleatorias:** Validar que los valores asignados a la clase están dentro del rango permitido (1 a 49).  
-- **Asignaturas Válidas:** Verificar que todas las asignaturas generadas pertenecen a la lista predefinida.  
-- **Distribución de Horas:** Asegurar que cada día tiene exactamente 5 horas asignadas y que las horas corresponden a los rangos definidos.  
-- **Reejecución de la Función:** Evaluar si la función agrega nuevos registros en lugar de sobrescribir los anteriores, evitando datos duplicados.  
+#### **Objetivo**  
+Verificar que la función genera horarios aleatorios correctamente para profesores, asegurando que los datos insertados sean válidos y consistentes.  
 
-## **Conclusión**
-Las pruebas verifican que la función genera horarios sin errores y con datos válidos.
+#### **Escenarios de Prueba**  
+- **Inserción de Datos:** Se deben insertar exactamente 25 registros por profesor (5 horas por 5 días).  
+- **Múltiples Profesores:** La función debe generar horarios para distintos profesores sin mezclar datos.  
+- **Rango de Clases Aleatorias:** Los valores asignados a la clase deben estar dentro del rango permitido (1 a 49).  
+- **Asignaturas Válidas:** Todas las asignaturas generadas deben pertenecer a la lista predefinida.  
+- **Distribución de Horas:** Cada día debe tener exactamente 5 horas asignadas en los rangos definidos.  
+- **Reejecución de la Función:** La función debe evitar duplicados si se ejecuta varias veces.  
+
+#### **Conclusión**  
+Las pruebas confirman que la función genera horarios sin errores y con datos válidos, asegurando la coherencia de la información almacenada en la base de datos.  
 
 ---
 
-# **Pruebas de Integración**  
+### **Pruebas de Integración**  
 
-## **Objetivo**  
-Asegurar que la aplicación interactúa correctamente con la base de datos y que los datos fluyen sin errores.
+#### **Objetivo**  
+Garantizar que la aplicación interactúa correctamente con la base de datos y que los datos fluyen sin errores entre sus distintos módulos.  
 
-## **Escenarios Clave**  
-- **Conexión a la base de datos:** Verificar que la aplicación accede sin fallos.  
-- **Generación de horarios:** Confirmar que los datos se insertan y reflejan correctamente en la UI.  
-- **Consulta y visualización:** Asegurar que los horarios recuperados son correctos.  
-- **Modificación y eliminación:** Evaluar que los cambios en los horarios se guardan correctamente.  
-- **Control de accesos:** Validar que solo los usuarios autorizados pueden modificar datos.  
-- **Rendimiento:** Probar la estabilidad con múltiples usuarios accediendo simultáneamente.  
+#### **Escenarios Clave**  
+- **Conexión a la base de datos:** La aplicación debe acceder sin fallos y manejar errores de conexión.  
+- **Generación de horarios:** Los datos generados deben insertarse correctamente y reflejarse en la UI.  
+- **Consulta y visualización:** Los horarios recuperados desde la base de datos deben ser precisos y actualizados.  
+- **Modificación y eliminación:** Los cambios en los horarios deben guardarse correctamente sin inconsistencias.  
+- **Control de accesos:** Solo los usuarios autorizados deben poder modificar horarios y datos sensibles.  
+- **Rendimiento:** La aplicación debe mantenerse estable con múltiples usuarios accediendo simultáneamente.  
 
-## **Conclusión**  
-La aplicación debe mantener la integridad de los datos, reflejar cambios en tiempo real y manejar accesos correctamente. 🚀  
+#### **Conclusión**  
+Las pruebas aseguran que la aplicación mantiene la integridad de los datos, actualiza la información en tiempo real y gestiona correctamente los accesos de los usuarios.
 
 
 **Base de Datos**
