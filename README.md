@@ -95,7 +95,7 @@ Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner l
 
 * Sergio Oyola Márquez, sergioyola147@gmail.com, SOyola33
 
-* [Tu nombre], [Tu correo electrónico], [Tu perfil de GitHub]
+* Héctor Aparicio Sánchez, hectoraparicio2005@outlook.es, HectorAS2005
 
 ## 10. Bibliografía
 
