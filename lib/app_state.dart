@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'flutter_flow/request_manager.dart';
-import '/backend/schema/structs/index.dart';
 import 'backend/supabase/supabase.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -18,31 +15,12 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {
-    prefs = await SharedPreferences.getInstance();
-    _safeInit(() {
-      _horarios = prefs
-              .getStringList('ff_horarios')
-              ?.map((x) {
-                try {
-                  return HorarioStruct.fromSerializableMap(jsonDecode(x));
-                } catch (e) {
-                  print("Can't decode persisted data type. Error: $e.");
-                  return null;
-                }
-              })
-              .withoutNulls
-              .toList() ??
-          _horarios;
-    });
-  }
+  Future initializePersistedState() async {}
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
-
-  late SharedPreferences prefs;
 
   bool _VisMenu = false;
   bool get VisMenu => _VisMenu;
@@ -68,47 +46,6 @@ class FFAppState extends ChangeNotifier {
     _esGuardia = value;
   }
 
-  List<HorarioStruct> _horarios = [];
-  List<HorarioStruct> get horarios => _horarios;
-  set horarios(List<HorarioStruct> value) {
-    _horarios = value;
-    prefs.setStringList(
-        'ff_horarios', value.map((x) => x.serialize()).toList());
-  }
-
-  void addToHorarios(HorarioStruct value) {
-    horarios.add(value);
-    prefs.setStringList(
-        'ff_horarios', _horarios.map((x) => x.serialize()).toList());
-  }
-
-  void removeFromHorarios(HorarioStruct value) {
-    horarios.remove(value);
-    prefs.setStringList(
-        'ff_horarios', _horarios.map((x) => x.serialize()).toList());
-  }
-
-  void removeAtIndexFromHorarios(int index) {
-    horarios.removeAt(index);
-    prefs.setStringList(
-        'ff_horarios', _horarios.map((x) => x.serialize()).toList());
-  }
-
-  void updateHorariosAtIndex(
-    int index,
-    HorarioStruct Function(HorarioStruct) updateFn,
-  ) {
-    horarios[index] = updateFn(_horarios[index]);
-    prefs.setStringList(
-        'ff_horarios', _horarios.map((x) => x.serialize()).toList());
-  }
-
-  void insertAtIndexInHorarios(int index, HorarioStruct value) {
-    horarios.insert(index, value);
-    prefs.setStringList(
-        'ff_horarios', _horarios.map((x) => x.serialize()).toList());
-  }
-
   int _horasAnadidas = 0;
   int get horasAnadidas => _horasAnadidas;
   set horasAnadidas(int value) {
@@ -131,6 +68,30 @@ class FFAppState extends ChangeNotifier {
   String get contraAct => _contraAct;
   set contraAct(String value) {
     _contraAct = value;
+  }
+
+  bool _horaCambiada = false;
+  bool get horaCambiada => _horaCambiada;
+  set horaCambiada(bool value) {
+    _horaCambiada = value;
+  }
+
+  bool _verGif = false;
+  bool get verGif => _verGif;
+  set verGif(bool value) {
+    _verGif = value;
+  }
+
+  int _asignadas = 0;
+  int get asignadas => _asignadas;
+  set asignadas(int value) {
+    _asignadas = value;
+  }
+
+  int _noAsignadas = 0;
+  int get noAsignadas => _noAsignadas;
+  set noAsignadas(int value) {
+    _noAsignadas = value;
   }
 
   final _aulasManager = FutureRequestManager<List<AulasRow>>();
@@ -177,16 +138,19 @@ class FFAppState extends ChangeNotifier {
   void clearAulasCrearCache() => _aulasCrearManager.clear();
   void clearAulasCrearCacheKey(String? uniqueKey) =>
       _aulasCrearManager.clearRequest(uniqueKey);
-}
 
-void _safeInit(Function() initializeField) {
-  try {
-    initializeField();
-  } catch (_) {}
-}
-
-Future _safeInitAsync(Function() initializeField) async {
-  try {
-    await initializeField();
-  } catch (_) {}
+  final _horariosManager = FutureRequestManager<List<HorarioRow>>();
+  Future<List<HorarioRow>> horarios({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<HorarioRow>> Function() requestFn,
+  }) =>
+      _horariosManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearHorariosCache() => _horariosManager.clear();
+  void clearHorariosCacheKey(String? uniqueKey) =>
+      _horariosManager.clearRequest(uniqueKey);
 }

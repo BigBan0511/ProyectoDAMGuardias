@@ -34,6 +34,8 @@ class _CambiarContrasenaWidgetState extends State<CambiarContrasenaWidget> {
 
     _model.confirmPasswordTextController ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

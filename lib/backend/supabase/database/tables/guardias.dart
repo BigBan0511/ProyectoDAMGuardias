@@ -17,15 +17,21 @@ class GuardiasRow extends SupabaseDataRow {
   int get id => getField<int>('id')!;
   set id(int value) => setField<int>('id', value);
 
-  DateTime get createdAt => getField<DateTime>('created_at')!;
-  set createdAt(DateTime value) => setField<DateTime>('created_at', value);
-
   int? get idProfesor => getField<int>('id_profesor');
   set idProfesor(int? value) => setField<int>('id_profesor', value);
 
-  int? get clase => getField<int>('Clase');
-  set clase(int? value) => setField<int>('Clase', value);
+  int? get clase => getField<int>('clase');
+  set clase(int? value) => setField<int>('clase', value);
 
-  DateTime? get hora => getField<DateTime>('Hora');
-  set hora(DateTime? value) => setField<DateTime>('Hora', value);
+  String? get hora => getField<String>('hora');
+  set hora(String? value) => setField<String>('hora', value);
+
+  String? get tarea => getField<String>('tarea');
+  set tarea(String? value) => setField<String>('tarea', value);
+
+  bool? get activa => getField<bool>('activa');
+  set activa(bool? value) => setField<bool>('activa', value);
+
+  String? get dia => getField<String>('dia');
+  set dia(String? value) => setField<String>('dia', value);
 }

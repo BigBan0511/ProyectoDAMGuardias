@@ -6,6 +6,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'menu_telef_model.dart';
 export 'menu_telef_model.dart';
 
@@ -54,6 +56,8 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -81,10 +85,9 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
               child: SizedBox(
                 width: 50.0,
                 height: 50.0,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    FlutterFlowTheme.of(context).primary,
-                  ),
+                child: SpinKitFoldingCube(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 50.0,
                 ),
               ),
             );
@@ -390,14 +393,14 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 4.0),
                     child: MouseRegion(
                       opaque: false,
-                      cursor: SystemMouseCursors.click ?? MouseCursor.defer,
+                      cursor: SystemMouseCursors.basic ?? MouseCursor.defer,
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          context.pushNamed(MisGuardiasWidget.routeName);
+                          context.pushNamed(HorariosWidget.routeName);
                         },
                         child: AnimatedContainer(
                           duration: Duration(milliseconds: 150),
@@ -405,6 +408,158 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: _model.mouseRegionHovered3
+                                ? Color(0xFFF67575)
+                                : FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 8.0, 0.0, 8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 0.0, 0.0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.chalkboardTeacher,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 24.0,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        'plgw6r8i' /* Horarios Sala de Profesores */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      onEnter: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered3 = true);
+                      }),
+                      onExit: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered3 = false);
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 4.0),
+                    child: MouseRegion(
+                      opaque: false,
+                      cursor: SystemMouseCursors.basic ?? MouseCursor.defer,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(GuardiasProfesWidget.routeName);
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 150),
+                          curve: Curves.easeInOut,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: _model.mouseRegionHovered4
+                                ? Color(0xFFF67575)
+                                : FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 8.0, 0.0, 8.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12.0, 0.0, 0.0, 0.0),
+                                  child: Icon(
+                                    Icons.calendar_month,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 24.0,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '3k2rq126' /* Guardias Disponibles */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            fontSize: 16.0,
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      onEnter: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered4 = true);
+                      }),
+                      onExit: ((event) async {
+                        safeSetState(() => _model.mouseRegionHovered4 = false);
+                      }),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 4.0),
+                    child: MouseRegion(
+                      opaque: false,
+                      cursor: SystemMouseCursors.basic ?? MouseCursor.defer,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            GuardiasWidget.routeName,
+                            queryParameters: {
+                              'tipoUsuario': serializeParam(
+                                dropdown7AccountUsersRow.rol,
+                                ParamType.String,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 150),
+                          curve: Curves.easeInOut,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: _model.mouseRegionHovered5
                                 ? Color(0xFFF67575)
                                 : FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -432,7 +587,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
-                                        '281lecsq' /* Mis guardias */,
+                                        'u7vwu84g' /* Guardias Sala de Profesores */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -450,10 +605,10 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         ),
                       ),
                       onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered3 = true);
+                        safeSetState(() => _model.mouseRegionHovered5 = true);
                       }),
                       onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered3 = false);
+                        safeSetState(() => _model.mouseRegionHovered5 = false);
                       }),
                     ),
                   ),
@@ -477,7 +632,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                             curve: Curves.easeInOut,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: _model.mouseRegionHovered4
+                              color: _model.mouseRegionHovered6
                                   ? Color(0xFFF67575)
                                   : FlutterFlowTheme.of(context)
                                       .secondaryBackground,
@@ -523,11 +678,11 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           ),
                         ),
                         onEnter: ((event) async {
-                          safeSetState(() => _model.mouseRegionHovered4 = true);
+                          safeSetState(() => _model.mouseRegionHovered6 = true);
                         }),
                         onExit: ((event) async {
                           safeSetState(
-                              () => _model.mouseRegionHovered4 = false);
+                              () => _model.mouseRegionHovered6 = false);
                         }),
                       ),
                     ),
@@ -737,7 +892,7 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                           curve: Curves.easeInOut,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: _model.mouseRegionHovered5
+                            color: _model.mouseRegionHovered7
                                 ? Color(0xFFF67575)
                                 : FlutterFlowTheme.of(context)
                                     .secondaryBackground,
@@ -783,10 +938,10 @@ class _MenuTelefWidgetState extends State<MenuTelefWidget>
                         ),
                       ),
                       onEnter: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered5 = true);
+                        safeSetState(() => _model.mouseRegionHovered7 = true);
                       }),
                       onExit: ((event) async {
-                        safeSetState(() => _model.mouseRegionHovered5 = false);
+                        safeSetState(() => _model.mouseRegionHovered7 = false);
                       }),
                     ),
                   ),

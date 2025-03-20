@@ -35,6 +35,8 @@ class _ConfirmarUsuarioWidgetState extends State<ConfirmarUsuarioWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => ConfirmarUsuarioModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override

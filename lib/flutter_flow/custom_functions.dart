@@ -8,7 +8,6 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'lat_lng.dart';
 import 'place.dart';
 import 'uploaded_file.dart';
-import '/backend/schema/structs/index.dart';
 import '/backend/supabase/supabase.dart';
 import '/auth/supabase_auth/auth_util.dart';
 
@@ -23,4 +22,22 @@ String? quitarString(String hora) {
     String intervalo = cadena.substring(inicio + 1, fin);
     return intervalo;
   }
+}
+
+/// Con esto conseguimos cambiar la primera letra del día escogido a
+/// mayúsculas
+String cambiarAMayusculas(String dia) {
+  String primerCaracterMayuscula = dia[0].toUpperCase();
+
+  // Obtiene el resto de la cadena (desde el segundo carácter)
+  String restoDeLaCadena = dia.substring(1);
+
+  // Combina el primer carácter en mayúscula con el resto de la cadena
+  return primerCaracterMayuscula + restoDeLaCadena;
+}
+
+/// Con este código obtenemos si las horas del que menos tiene son iguales al
+/// que quiere aceptar la guardia
+double dosconcincohoras(double hora1) {
+  return hora1 + 3;
 }

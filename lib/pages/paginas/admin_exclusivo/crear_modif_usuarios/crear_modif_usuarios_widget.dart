@@ -59,6 +59,7 @@ class _CrearModifUsuariosWidgetState extends State<CrearModifUsuariosWidget> {
         TextEditingController(text: widget.contrasena);
     _model.contraInicFocusNode ??= FocusNode();
     _model.contraInicFocusNode!.addListener(() => safeSetState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -100,6 +101,7 @@ class _CrearModifUsuariosWidgetState extends State<CrearModifUsuariosWidget> {
                 ),
                 style: FlutterFlowTheme.of(context).labelMedium.override(
                       fontFamily: 'Inter',
+                      fontSize: 16.0,
                       letterSpacing: 0.0,
                     ),
               ),
@@ -467,6 +469,7 @@ class _CrearModifUsuariosWidgetState extends State<CrearModifUsuariosWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -475,8 +478,8 @@ class _CrearModifUsuariosWidgetState extends State<CrearModifUsuariosWidget> {
                                         safeSetState(() {
                                           _model.contraInicTextController
                                               ?.text = random_data.randomString(
-                                            5,
                                             8,
+                                            12,
                                             true,
                                             true,
                                             true,
@@ -515,6 +518,7 @@ class _CrearModifUsuariosWidgetState extends State<CrearModifUsuariosWidget> {
                                           .labelMedium
                                           .override(
                                             fontFamily: 'Inter',
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
                                           ),
                                     ),
@@ -543,6 +547,7 @@ class _CrearModifUsuariosWidgetState extends State<CrearModifUsuariosWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                             ),
                                         iconColor: FlutterFlowTheme.of(context)
@@ -567,6 +572,7 @@ class _CrearModifUsuariosWidgetState extends State<CrearModifUsuariosWidget> {
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
+                                              fontSize: 16.0,
                                               letterSpacing: 0.0,
                                             ),
                                         iconColor: FlutterFlowTheme.of(context)

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>ProyectoDAMGuardias</string>
+	<string>GuardiApp</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -50,7 +50,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
+	<key>NSCameraUsageDescription</key>
+    <string>Acepte el permiso para poder usar una la cámara de su dispositivo para cambiar su imagen de perfil</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>Para poder subir una imagen debe aceptar los permisos de acceso</string>
 
 
 

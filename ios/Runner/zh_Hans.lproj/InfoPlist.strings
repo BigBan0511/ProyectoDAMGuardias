@@ -1,1 +1,2 @@
-
+NSCameraUsageDescription = "请接受使用您设备的相机来更改您的个人资料图片的权限。";
+NSPhotoLibraryUsageDescription = "要上传图片，您必须接受访问权限";
