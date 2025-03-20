@@ -118,7 +118,7 @@ Entre los principales logros del proyecto, destacamos:
 **Futuras mejoras**
 * Notificaciones en tiempo real para avisar cambios en las guardias.
 * Versión para iOS.
-* Planos como posible mejora en el futuro donde salgan las clases ocupadas.
+* Planos de las aulas del centro donde salgan las clases ocupadas.
 * Integración con plataformas educativas como Google Classroom o Moodle.
 
 ## 12. Manual de Usuario
