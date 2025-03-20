@@ -151,10 +151,10 @@ Las pruebas aseguran que la aplicación mantiene la integridad de los datos, act
 ## **Base de Datos**
 ![BD](BD.png)
 
-**Ficheros**
+## **Ficheros**
 La app contiene ficheros de imágen como asset y buckets en Supabase donde guardar la imagen de perfil.
 
-**Despliege o Publicación**
+## **Despliege o Publicación**
 Despliegue en Github
 
 
