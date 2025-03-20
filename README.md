@@ -148,7 +148,7 @@ Garantizar que la aplicación interactúa correctamente con la base de datos y q
 Las pruebas aseguran que la aplicación mantiene la integridad de los datos, actualiza la información en tiempo real y gestiona correctamente los accesos de los usuarios.
 
 
-**Base de Datos**
+## **Base de Datos**
 ![BD](BD.png)
 
 **Ficheros**
