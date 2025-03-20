@@ -79,12 +79,10 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 
 * **Visualización de Guardias:** Consulta el panel de guardias del día actual y la lista de profesores disponibles.
 
-## 7. Arquitectura (si aplica)
+## 7. Arquitectura (Estructura y Diagrama)
 
-* Diagrama de la App
 ![Diagrama de la App](DiagramaApp.png)
 
-* Estructura de páginas y demás de la App
 ![Estructura de la App](EstructuraApp.png)
 
 ## 8. Licencia
