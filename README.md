@@ -97,7 +97,12 @@ Este proyecto está bajo la licencia de código abierto.
 
 ## 10. Bibliografía
 
-* [Lista de recursos utilizados, incluyendo documentación de librerías, artículos, etc.]
+* Flutterflow (Dart, Flutter...)
+* Flutterflow Docs
+* Supabase
+* GitHub
+* Google Suite
+* Discord (Comunicación entre miembros del equipo)
 
 ## 11. Conclusiones y Futuras Mejoras 
 **Conclusiones**
@@ -119,9 +124,3 @@ Entre los principales logros del proyecto, destacamos:
 ## 12. Manual de Usuario
 
 * [Descargar el Manual de Usuario](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Manual%20de%20Usuario%20-%20GuardiApp.pdf)
-
-**Cambios realizados:**
-
-* Se eliminó la referencia a la lectura de archivos XML en la sección de "Características Principales" y "Instalación".
-* Se modificó la descripción de la "Gestión de Horarios" para indicar que el administrador crea y edita los horarios directamente.
-* Se eliminó el requisito del lector de archivos XML en la sección de "Requisitos".
