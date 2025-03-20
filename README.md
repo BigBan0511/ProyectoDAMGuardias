@@ -14,8 +14,9 @@ Este repositorio contiene el código fuente y la documentación del programa.
 8.  Licencia
 9. Contacto
 10. Bibliografía
-11. Conclusiones y Futuras Mejoras
-12. Manual de Usuario
+11. Tecnologías
+12. Conclusiones y Futuras Mejoras
+13. Manual de Usuario
 
 ## 1. Descripción
 
@@ -104,7 +105,25 @@ Este proyecto está bajo la licencia de código abierto.
 * Google Suite
 * Discord (Comunicación entre miembros del equipo)
 
-## 11. Conclusiones y Futuras Mejoras 
+## 11. Tecnologías
+
+**Control de versiones**
+![Versiones](Versiones.png)
+
+**Tests**
+
+**Base de Datos**
+![BD](BD.png)
+
+**Ficheros**
+La app contiene ficheros de imágen como asset y buckets en Supabase donde guardar la imagen de perfil.
+
+**Despliege o Publicación**
+Despliegue en Github
+
+
+
+## 12. Conclusiones y Futuras Mejoras 
 **Conclusiones**
 <br>
 El desarrollo de GuardiApp ha permitido la creación de una herramienta eficiente para la gestión de guardias en el instituto, optimizando la comunicación entre profesores y mejorando la organización interna.
@@ -121,6 +140,6 @@ Entre los principales logros del proyecto, destacamos:
 * Planos de las aulas del centro donde salgan las clases ocupadas.
 * Integración con plataformas educativas como Google Classroom o Moodle.
 
-## 12. Manual de Usuario
+## 13. Manual de Usuario
 
 * [Descargar el Manual de Usuario](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Manual%20de%20Usuario%20-%20GuardiApp.pdf)
