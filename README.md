@@ -85,7 +85,7 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 
 ## 8. Licencia
 
-Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner licencia si queréis).
+Este proyecto está bajo la licencia de código abierto.
 
 ## 9. Contacto
 
