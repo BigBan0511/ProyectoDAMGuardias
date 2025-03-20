@@ -108,6 +108,7 @@ Este proyecto está bajo la licencia de código abierto.
 ## 11. Tecnologías
 
 **Control de versiones**
+<br>
 ![Versiones](Versiones.png)
 
 **Tests**
