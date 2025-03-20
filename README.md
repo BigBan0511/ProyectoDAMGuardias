@@ -21,7 +21,7 @@ Este repositorio contiene el código fuente y la documentación del programa.
 
 Este programa intenta simplificar y automatizar la gestión de horas de guardia en los centros educativos, permitiendo a directores, profesores y personal administrativo organizarse de manera efectiva, rápida y fácil.
 
-## 2. Características principales (No está del todo pero más o menos cuando terminemos lo completamos mejor)
+## 2. Características principales
 
 * **Gestión de Horarios:**
     * Creación y edición de horarios de profesores por el administrador.
@@ -49,11 +49,12 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 
 ## 4. Requisitos (ni puta idea jaja)
 
-* [Lista de requisitos de software y hardware]
-* [Lista de dependencias]
-* Base de datos para almacenar horarios, usuarios y guardias.
+* Versión de Kotlin --> 1.8.22
+* SDK mínimo --> 23
+* SDK compilación --> 34
+* Base de datos en la que almacenar horarios, usuarios, guardias, etc.
 
-## 5. Instalación (Hay que cambiarlo después)
+## 5. Instalación
 
 1.  Descargar el [APK](https://github.com/BigBan0511/ProyectoDAMGuardias/releases/tag/Tag1)
 2.  Iniciar sesión con las credenciales proporcionadas por el administrador.
