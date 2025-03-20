@@ -107,7 +107,7 @@ Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner l
 
 ## 12. Manual de Usuario
 
-* [Enlace a un documento PDF o archivo Markdown con el manual de usuario detallado]
+* [Manual de Usuario](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Manual%20de%20Usuario%20-%20GuardiApp.pdf)
 
 **Cambios realizados:**
 
