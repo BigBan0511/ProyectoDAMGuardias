@@ -81,9 +81,7 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 
 ## 7. Arquitectura (Estructura y Diagrama)
 
-![Diagrama de la App](DiagramaApp.png)
 
-![Estructura de la App](EstructuraApp.png)
 
 ## 8. Licencia
 
