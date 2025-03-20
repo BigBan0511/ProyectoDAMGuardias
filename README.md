@@ -112,6 +112,28 @@ Este proyecto está bajo la licencia de código abierto.
 ![Versiones](Versiones.png)
 
 **Tests**
+Resumen de Pruebas Unitarias para generar_horario_vesper
+Objetivo:
+Verificar que la función genera horarios aleatorios correctamente para profesores, asegurando que los datos insertados sean válidos y consistentes.
+Escenarios de Prueba:
+Inserción de Datos: Comprobar que se insertan exactamente 25 registros por profesor (5 horas por 5 días).
+Múltiples Profesores: Confirmar que la función puede generar horarios para distintos profesores sin mezclar datos.
+Rango de Clases Aleatorias: Validar que los valores asignados a la clase están dentro del rango permitido (1 a 49).
+Asignaturas Válidas: Verificar que todas las asignaturas generadas pertenecen a la lista predefinida.
+Distribución de Horas: Asegurar que cada día tiene exactamente 5 horas asignadas y que las horas corresponden a los rangos definidos.
+Reejecución de la Función: Evaluar si la función agrega nuevos registros en lugar de sobrescribir los anteriores, evitando datos duplicados.
+Conclusión:
+Las pruebas verifican que la función genera horarios sin errores y con datos válidos.
+
+Resumen de Pruebas de Integración
+🔹 Objetivo: Asegurar que la aplicación interactúa correctamente con la base de datos y que los datos fluyen sin errores.
+ Conexión a la base de datos: Verificar que la aplicación accede sin fallos.
+ Generación de horarios: Confirmar que los datos se insertan y reflejan correctamente en la UI.
+ Consulta y visualización: Asegurar que los horarios recuperados son correctos.
+ Modificación y eliminación: Evaluar que los cambios en los horarios se guardan correctamente.
+ Control de accesos: Validar que solo los usuarios autorizados pueden modificar datos.
+ Rendimiento: Probar la estabilidad con múltiples usuarios accediendo simultáneamente.
+🔹 Conclusión: La aplicación debe mantener la integridad de los datos, reflejar cambios en tiempo real y manejar accesos correctamente.
 
 **Base de Datos**
 ![BD](BD.png)
