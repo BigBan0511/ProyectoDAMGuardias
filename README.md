@@ -55,13 +55,10 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 
 ## 5. Instalación (Hay que cambiarlo después)
 
-1.  Clona el repositorio: `git clone https://github.com/cran/DELTD`
-2.  Instala las dependencias: `[Comandos para instalar dependencias]`
-3.  Configura la base de datos: `[Instrucciones para configurar la base de datos]`
-4.  Importa los horarios desde el archivo XML: `[Comandos para importar horarios]`
-5.  Ejecuta la aplicación: `[Comandos para ejecutar la aplicación]`
+1.  Descargar el [APK]()
+2.  Iniciar sesión con las credenciales proporcionadas por el administrador.
 
-## 6. Uso (No está del todo pero más o menos cuando terminemos lo completamos mejor)
+## 6. Uso
 
 ### Rol Administrador
 
