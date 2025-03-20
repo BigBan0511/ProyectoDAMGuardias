@@ -113,7 +113,10 @@ Entre los principales logros del proyecto, destacamos:
 * Flexibilidad y personalización, con opciones de configuración como cambio de idioma, modo oscuro y ajustes de perfil.
 
 **Futuras mejoras**
-
+* Notificaciones en tiempo real para avisar cambios en las guardias.
+* Versión para iOS.
+* Planos como posible mejora en el futuro donde salgan las clases ocupadas.
+* Integración con plataformas educativas como Google Classroom o Moodle.
 
 ## 12. Manual de Usuario
 
