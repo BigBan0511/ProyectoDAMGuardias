@@ -102,8 +102,15 @@ Este proyecto está bajo la licencia [Nombre de la licencia] (le podemos poner l
 * [Lista de recursos utilizados, incluyendo documentación de librerías, artículos, etc.]
 
 ## 11. Conclusiones y Futuras Mejoras
+# Conclusiones
+* El desarrollo de GuardiApp ha permitido la creación de una herramienta eficiente para la gestión de guardias en el instituto, optimizando la comunicación entre profesores y mejorando la organización interna.
 
-* [Conclusiones sobre el desarrollo del proyecto y posibles mejoras futuras]
+Entre los principales logros del proyecto, destacamos:
+
+Automatización de la asignación de guardias, reduciendo la carga administrativa.
+Mejora en la accesibilidad de la información, permitiendo a los profesores consultar horarios y guardias en tiempo real.
+Interfaz intuitiva, facilitando su uso sin necesidad de formación adicional.
+Flexibilidad y personalización, con opciones de configuración como cambio de idioma, modo oscuro y ajustes de perfil.
 
 ## 12. Manual de Usuario
 
