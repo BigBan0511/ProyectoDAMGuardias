@@ -94,6 +94,12 @@ class FFAppState extends ChangeNotifier {
     _noAsignadas = value;
   }
 
+  double _horas = 0.0;
+  double get horas => _horas;
+  set horas(double value) {
+    _horas = value;
+  }
+
   final _aulasManager = FutureRequestManager<List<AulasRow>>();
   Future<List<AulasRow>> aulas({
     String? uniqueQueryKey,
