@@ -1040,12 +1040,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ru': 'Вторник',
       'zh_Hans': '周二',
     },
+    'x6s8obnf': {
+      'es': 'Posibles asignaciones:',
+      'en': 'Possible assignments:',
+      'eu': 'Egin daitezkeen lanak:',
+      'ru': 'Возможные задания:',
+      'zh_Hans': '可能的任务：',
+    },
     '8168xc6g': {
       'es': 'Miércoles',
       'en': 'Wednesday',
       'eu': 'asteazkena',
       'ru': 'Среда',
       'zh_Hans': '周三',
+    },
+    '5y4v94h3': {
+      'es': 'Posibles asignaciones:',
+      'en': 'Possible assignments:',
+      'eu': 'Egin daitezkeen lanak:',
+      'ru': 'Возможные задания:',
+      'zh_Hans': '可能的任务：',
     },
     'vcsvny35': {
       'es': 'Jueves',
@@ -1054,12 +1068,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ru': 'Четверг',
       'zh_Hans': '周四',
     },
+    '3r12hefe': {
+      'es': 'Posibles asignaciones:',
+      'en': 'Possible assignments:',
+      'eu': 'Egin daitezkeen lanak:',
+      'ru': 'Возможные задания:',
+      'zh_Hans': '可能的任务：',
+    },
     'djklgja7': {
       'es': 'Viernes',
       'en': 'Friday',
       'eu': 'ostirala',
       'ru': 'Пятница',
       'zh_Hans': '星期五',
+    },
+    'waitwdvp': {
+      'es': 'Posibles asignaciones:',
+      'en': 'Possible assignments:',
+      'eu': 'Egin daitezkeen lanak:',
+      'ru': 'Возможные задания:',
+      'zh_Hans': '可能的任务：',
     },
     'o109p734': {
       'es': 'Guardias',

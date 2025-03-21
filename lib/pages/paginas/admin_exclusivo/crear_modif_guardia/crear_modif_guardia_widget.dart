@@ -730,22 +730,30 @@ class _CrearModifGuardiaWidgetState extends State<CrearModifGuardiaWidget> {
                                             ),
                                           );
                                         } else {
-                                          await GuardiasTable().insert({
-                                            'id_profesor': maxWidthUsersRow?.id,
-                                            'clase':
-                                                crearModifGuardiaAulasRowList
-                                                    .where((e) =>
-                                                        _model.aulaValue ==
-                                                        e.codAula)
-                                                    .toList()
-                                                    .firstOrNull
-                                                    ?.id,
-                                            'hora': _model.horaDiurnoValue,
-                                            'activa':
-                                                _model.profeValue != null &&
-                                                    _model.profeValue != '',
-                                            'dia': _model.diaValue,
-                                          });
+                                          await GuardiasTable().update(
+                                            data: {
+                                              'id_profesor':
+                                                  maxWidthUsersRow?.id,
+                                              'clase':
+                                                  crearModifGuardiaAulasRowList
+                                                      .where((e) =>
+                                                          _model.aulaValue ==
+                                                          e.codAula)
+                                                      .toList()
+                                                      .firstOrNull
+                                                      ?.id,
+                                              'hora': _model.horaDiurnoValue,
+                                              'activa':
+                                                  _model.profeValue != null &&
+                                                      _model.profeValue != '',
+                                              'dia': _model.diaValue,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
+                                              widget.index,
+                                            ),
+                                          );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
@@ -994,22 +1002,30 @@ class _CrearModifGuardiaWidgetState extends State<CrearModifGuardiaWidget> {
                                             ),
                                           );
                                         } else {
-                                          await GuardiasTable().insert({
-                                            'id_profesor': maxWidthUsersRow?.id,
-                                            'clase':
-                                                crearModifGuardiaAulasRowList
-                                                    .where((e) =>
-                                                        _model.aulaValue ==
-                                                        e.codAula)
-                                                    .toList()
-                                                    .firstOrNull
-                                                    ?.id,
-                                            'hora': _model.horaVesperValue,
-                                            'activa':
-                                                _model.profeValue != null &&
-                                                    _model.profeValue != '',
-                                            'dia': _model.diaValue,
-                                          });
+                                          await GuardiasTable().update(
+                                            data: {
+                                              'id_profesor':
+                                                  maxWidthUsersRow?.id,
+                                              'clase':
+                                                  crearModifGuardiaAulasRowList
+                                                      .where((e) =>
+                                                          _model.aulaValue ==
+                                                          e.codAula)
+                                                      .toList()
+                                                      .firstOrNull
+                                                      ?.id,
+                                              'hora': _model.horaVesperValue,
+                                              'activa':
+                                                  _model.profeValue != null &&
+                                                      _model.profeValue != '',
+                                              'dia': _model.diaValue,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
+                                              widget.index,
+                                            ),
+                                          );
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(

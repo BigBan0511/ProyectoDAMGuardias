@@ -47,19 +47,6 @@ class _PanelControlWidgetState extends State<PanelControlWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          buttonSize: 46.0,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 25.0,
-          ),
-          onPressed: () async {
-            context.pushNamed(InicioWidget.routeName);
-          },
-        ),
         actions: [
           Builder(
             builder: (context) => FlutterFlowIconButton(
