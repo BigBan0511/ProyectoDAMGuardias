@@ -149,6 +149,7 @@ Las pruebas aseguran que la aplicación mantiene la integridad de los datos, act
 
 
 ## **Base de Datos**
+[Documentación de la BD](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Documentaci%C3%B3n%20Base%20de%20datos.pdf)
 ![BD](BD.png)
 
 ## **Ficheros**
