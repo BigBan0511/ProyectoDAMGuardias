@@ -17,6 +17,7 @@ Este repositorio contiene el código fuente y la documentación del programa.
 11. Tecnologías
 12. Conclusiones y Futuras Mejoras
 13. Manual de Usuario
+14. Plan de negocio
 
 ## 1. Descripción
 
@@ -181,3 +182,7 @@ Entre los principales logros del proyecto, destacamos:
 ## 13. Manual de Usuario
 
 * [Descargar el Manual de Usuario](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Manual%20de%20Usuario%20-%20GuardiApp.pdf)
+
+## 14. Plan de Negocio
+
+* [Plan de Negocio](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Plan%20de%20negocio.pdf)
