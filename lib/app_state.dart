@@ -94,6 +94,12 @@ class FFAppState extends ChangeNotifier {
     _noAsignadas = value;
   }
 
+  double _horas = 0.0;
+  double get horas => _horas;
+  set horas(double value) {
+    _horas = value;
+  }
+
   final _aulasManager = FutureRequestManager<List<AulasRow>>();
   Future<List<AulasRow>> aulas({
     String? uniqueQueryKey,
@@ -138,19 +144,4 @@ class FFAppState extends ChangeNotifier {
   void clearAulasCrearCache() => _aulasCrearManager.clear();
   void clearAulasCrearCacheKey(String? uniqueKey) =>
       _aulasCrearManager.clearRequest(uniqueKey);
-
-  final _horariosManager = FutureRequestManager<List<HorarioRow>>();
-  Future<List<HorarioRow>> horarios({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Future<List<HorarioRow>> Function() requestFn,
-  }) =>
-      _horariosManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearHorariosCache() => _horariosManager.clear();
-  void clearHorariosCacheKey(String? uniqueKey) =>
-      _horariosManager.clearRequest(uniqueKey);
 }

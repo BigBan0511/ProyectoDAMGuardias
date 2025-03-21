@@ -195,19 +195,19 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 1.0, 0.0, 20.0),
                       child: Builder(
                         builder: (context) {
-                          final us = usuariosUsersRowList
-                              .where((e) => (e.rol == 'Profesor') && (e.id > 1))
-                              .toList();
+                          final use = usuariosUsersRowList.toList();
 
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: us.length,
-                            itemBuilder: (context, usIndex) {
-                              final usItem = us[usIndex];
+                            itemCount: use.length,
+                            itemBuilder: (context, useIndex) {
+                              final useItem = use[useIndex];
                               return Visibility(
-                                visible: usItem.activo ?? true,
+                                visible: (useItem.activo == true) &&
+                                    (useItem.id > 1) &&
+                                    (useItem.rol == 'Profesor'),
                                 child: Slidable(
                                   endActionPane: ActionPane(
                                     motion: const ScrollMotion(),
@@ -228,19 +228,19 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                                             queryParameters: {
                                               'nombre': serializeParam(
                                                 usuariosUsersRowList
-                                                    .elementAtOrNull(usIndex)
+                                                    .elementAtOrNull(useIndex)
                                                     ?.nombre,
                                                 ParamType.String,
                                               ),
                                               'email': serializeParam(
                                                 usuariosUsersRowList
-                                                    .elementAtOrNull(usIndex)
+                                                    .elementAtOrNull(useIndex)
                                                     ?.email,
                                                 ParamType.String,
                                               ),
                                               'rol': serializeParam(
                                                 usuariosUsersRowList
-                                                    .elementAtOrNull(usIndex)
+                                                    .elementAtOrNull(useIndex)
                                                     ?.rol,
                                                 ParamType.String,
                                               ),
@@ -250,7 +250,7 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                                               ),
                                               'id': serializeParam(
                                                 usuariosUsersRowList
-                                                    .elementAtOrNull(usIndex)
+                                                    .elementAtOrNull(useIndex)
                                                     ?.id,
                                                 ParamType.int,
                                               ),
@@ -277,7 +277,7 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                                                 rows.eqOrNull(
                                               'id',
                                               usuariosUsersRowList
-                                                  .elementAtOrNull(usIndex)
+                                                  .elementAtOrNull(useIndex)
                                                   ?.id,
                                             ),
                                           );
@@ -293,7 +293,7 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                                     color: Colors.transparent,
                                     child: ListTile(
                                       title: Text(
-                                        '${usuariosUsersRowList.elementAtOrNull(usIndex)?.nombre} (${usuariosUsersRowList.elementAtOrNull(usIndex)?.rol})',
+                                        '${usuariosUsersRowList.elementAtOrNull(useIndex)?.nombre} (${usuariosUsersRowList.elementAtOrNull(useIndex)?.rol})',
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge
                                             .override(
@@ -303,7 +303,7 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                                       ),
                                       subtitle: Text(
                                         valueOrDefault<String>(
-                                          usItem.email,
+                                          useItem.email,
                                           'No email',
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -365,9 +365,7 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: Builder(
                         builder: (context) {
-                          final us2 = usuariosUsersRowList
-                              .where((e) => (e.rol == 'Admin') && (e.id > 1))
-                              .toList();
+                          final us2 = usuariosUsersRowList.toList();
 
                           return ListView.builder(
                             padding: EdgeInsets.zero,
@@ -376,122 +374,131 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                             itemCount: us2.length,
                             itemBuilder: (context, us2Index) {
                               final us2Item = us2[us2Index];
-                              return Slidable(
-                                endActionPane: ActionPane(
-                                  motion: const ScrollMotion(),
-                                  extentRatio: 0.5,
-                                  children: [
-                                    SlidableAction(
-                                      label:
-                                          FFLocalizations.of(context).getText(
-                                        'y0t5fkd5' /* Editar */,
+                              return Visibility(
+                                visible: (us2Item.activo == true) &&
+                                    (us2Item.id > 1) &&
+                                    (us2Item.rol == 'Admin'),
+                                child: Slidable(
+                                  endActionPane: ActionPane(
+                                    motion: const ScrollMotion(),
+                                    extentRatio: 0.5,
+                                    children: [
+                                      SlidableAction(
+                                        label:
+                                            FFLocalizations.of(context).getText(
+                                          'y0t5fkd5' /* Editar */,
+                                        ),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .success,
+                                        icon: Icons.edit,
+                                        onPressed: (_) async {
+                                          context.pushNamed(
+                                            CrearModifUsuariosWidget.routeName,
+                                            queryParameters: {
+                                              'nombre': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(us2Index)
+                                                    ?.nombre,
+                                                ParamType.String,
+                                              ),
+                                              'email': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(us2Index)
+                                                    ?.email,
+                                                ParamType.String,
+                                              ),
+                                              'rol': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(us2Index)
+                                                    ?.rol,
+                                                ParamType.String,
+                                              ),
+                                              'modo': serializeParam(
+                                                'modificar',
+                                                ParamType.String,
+                                              ),
+                                              'id': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(us2Index)
+                                                    ?.id,
+                                                ParamType.int,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
                                       ),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context).success,
-                                      icon: Icons.edit,
-                                      onPressed: (_) async {
-                                        context.pushNamed(
-                                          CrearModifUsuariosWidget.routeName,
-                                          queryParameters: {
-                                            'nombre': serializeParam(
-                                              usuariosUsersRowList
-                                                  .elementAtOrNull(us2Index)
-                                                  ?.nombre,
-                                              ParamType.String,
-                                            ),
-                                            'email': serializeParam(
-                                              usuariosUsersRowList
-                                                  .elementAtOrNull(us2Index)
-                                                  ?.email,
-                                              ParamType.String,
-                                            ),
-                                            'rol': serializeParam(
-                                              usuariosUsersRowList
-                                                  .elementAtOrNull(us2Index)
-                                                  ?.rol,
-                                              ParamType.String,
-                                            ),
-                                            'modo': serializeParam(
-                                              'modificar',
-                                              ParamType.String,
-                                            ),
-                                            'id': serializeParam(
+
+                                      // Habría que poner una tabla que sea de los que se quitan porque pedro dijo que no podíamos borrarlos tal cual, sino que se queden como de "baja".
+                                      SlidableAction(
+                                        label:
+                                            FFLocalizations.of(context).getText(
+                                          'vqvwz53e' /* Borrar */,
+                                        ),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                        icon: Icons.delete_outline_rounded,
+                                        onPressed: (_) async {
+                                          await UsersTable().update(
+                                            data: {
+                                              'activo': false,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
                                               usuariosUsersRowList
                                                   .elementAtOrNull(us2Index)
                                                   ?.id,
-                                              ParamType.int,
                                             ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                    ),
-
-                                    // Habría que poner una tabla que sea de los que se quitan porque pedro dijo que no podíamos borrarlos tal cual, sino que se queden como de "baja".
-                                    SlidableAction(
-                                      label:
-                                          FFLocalizations.of(context).getText(
-                                        'vqvwz53e' /* Borrar */,
+                                          );
+                                          safeSetState(() =>
+                                              _model.requestCompleter = null);
+                                          await _model
+                                              .waitForRequestCompleted();
+                                        },
                                       ),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context).error,
-                                      icon: Icons.delete_outline_rounded,
-                                      onPressed: (_) async {
-                                        await UsersTable().update(
-                                          data: {
-                                            'activo': false,
-                                          },
-                                          matchingRows: (rows) => rows.eqOrNull(
-                                            'id',
-                                            usuariosUsersRowList
-                                                .elementAtOrNull(us2Index)
-                                                ?.id,
-                                          ),
-                                        );
-                                        safeSetState(() =>
-                                            _model.requestCompleter = null);
-                                        await _model.waitForRequestCompleted();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: ListTile(
-                                    title: Text(
-                                      '${us2Item.nombre} (${us2Item.rol})',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    subtitle: Text(
-                                      valueOrDefault<String>(
-                                        us2Item.email,
-                                        'No email',
+                                    ],
+                                  ),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      title: Text(
+                                        '${us2Item.nombre} (${us2Item.rol})',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    trailing: Icon(
-                                      Icons.swipe_left,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                    tileColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    dense: false,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            12.0, 0.0, 12.0, 0.0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      subtitle: Text(
+                                        valueOrDefault<String>(
+                                          us2Item.email,
+                                          'No email',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      trailing: Icon(
+                                        Icons.swipe_left,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              12.0, 0.0, 12.0, 0.0),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -528,159 +535,173 @@ class _UsuariosWidgetState extends State<UsuariosWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                       child: Builder(
                         builder: (context) {
-                          final us3 = usuariosUsersRowList
-                              .where((e) => (e.activo == false) && (e.id > 1))
-                              .toList();
+                          final usuarios3 = usuariosUsersRowList.toList();
 
                           return ListView.builder(
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: us3.length,
-                            itemBuilder: (context, us3Index) {
-                              final us3Item = us3[us3Index];
-                              return Slidable(
-                                endActionPane: ActionPane(
-                                  motion: const ScrollMotion(),
-                                  extentRatio: 0.75,
-                                  children: [
-                                    SlidableAction(
-                                      label:
-                                          FFLocalizations.of(context).getText(
-                                        'v4i3za1i' /* Editar */,
+                            itemCount: usuarios3.length,
+                            itemBuilder: (context, usuarios3Index) {
+                              final usuarios3Item = usuarios3[usuarios3Index];
+                              return Visibility(
+                                visible: (usuarios3Item.activo == false) &&
+                                    (usuarios3Item.id > 1),
+                                child: Slidable(
+                                  endActionPane: ActionPane(
+                                    motion: const ScrollMotion(),
+                                    extentRatio: 0.75,
+                                    children: [
+                                      SlidableAction(
+                                        label:
+                                            FFLocalizations.of(context).getText(
+                                          'v4i3za1i' /* Editar */,
+                                        ),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .success,
+                                        icon: Icons.edit,
+                                        onPressed: (_) async {
+                                          context.pushNamed(
+                                            CrearModifUsuariosWidget.routeName,
+                                            queryParameters: {
+                                              'nombre': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(
+                                                        usuarios3Index)
+                                                    ?.nombre,
+                                                ParamType.String,
+                                              ),
+                                              'email': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(
+                                                        usuarios3Index)
+                                                    ?.email,
+                                                ParamType.String,
+                                              ),
+                                              'rol': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(
+                                                        usuarios3Index)
+                                                    ?.rol,
+                                                ParamType.String,
+                                              ),
+                                              'modo': serializeParam(
+                                                'modificar',
+                                                ParamType.String,
+                                              ),
+                                              'id': serializeParam(
+                                                usuariosUsersRowList
+                                                    .elementAtOrNull(
+                                                        usuarios3Index)
+                                                    ?.id,
+                                                ParamType.int,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        },
                                       ),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context).success,
-                                      icon: Icons.edit,
-                                      onPressed: (_) async {
-                                        context.pushNamed(
-                                          CrearModifUsuariosWidget.routeName,
-                                          queryParameters: {
-                                            'nombre': serializeParam(
-                                              usuariosUsersRowList
-                                                  .elementAtOrNull(us3Index)
-                                                  ?.nombre,
-                                              ParamType.String,
-                                            ),
-                                            'email': serializeParam(
-                                              usuariosUsersRowList
-                                                  .elementAtOrNull(us3Index)
-                                                  ?.email,
-                                              ParamType.String,
-                                            ),
-                                            'rol': serializeParam(
-                                              usuariosUsersRowList
-                                                  .elementAtOrNull(us3Index)
-                                                  ?.rol,
-                                              ParamType.String,
-                                            ),
-                                            'modo': serializeParam(
-                                              'modificar',
-                                              ParamType.String,
-                                            ),
-                                            'id': serializeParam(
-                                              usuariosUsersRowList
-                                                  .elementAtOrNull(us3Index)
-                                                  ?.id,
-                                              ParamType.int,
-                                            ),
-                                          }.withoutNulls,
-                                        );
-                                      },
-                                    ),
 
-                                    // Habría que poner una tabla que sea de los que se quitan porque pedro dijo que no podíamos borrarlos tal cual, sino que se queden como de "baja".
-                                    SlidableAction(
-                                      label:
-                                          FFLocalizations.of(context).getText(
-                                        'semu3sof' /* Borrar */,
+                                      // Habría que poner una tabla que sea de los que se quitan porque pedro dijo que no podíamos borrarlos tal cual, sino que se queden como de "baja".
+                                      SlidableAction(
+                                        label:
+                                            FFLocalizations.of(context).getText(
+                                          'semu3sof' /* Borrar */,
+                                        ),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                        icon: Icons.delete_outline_rounded,
+                                        onPressed: (_) async {
+                                          await UsersTable().update(
+                                            data: {
+                                              'activo': false,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
+                                              usuariosUsersRowList
+                                                  .elementAtOrNull(
+                                                      usuarios3Index)
+                                                  ?.id,
+                                            ),
+                                          );
+                                          safeSetState(() =>
+                                              _model.requestCompleter = null);
+                                          await _model
+                                              .waitForRequestCompleted();
+                                        },
                                       ),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context).error,
-                                      icon: Icons.delete_outline_rounded,
-                                      onPressed: (_) async {
-                                        await UsersTable().update(
-                                          data: {
-                                            'activo': false,
-                                          },
-                                          matchingRows: (rows) => rows.eqOrNull(
-                                            'id',
-                                            usuariosUsersRowList
-                                                .elementAtOrNull(us3Index)
-                                                ?.id,
-                                          ),
-                                        );
-                                        safeSetState(() =>
-                                            _model.requestCompleter = null);
-                                        await _model.waitForRequestCompleted();
-                                      },
-                                    ),
-                                    SlidableAction(
-                                      label:
-                                          FFLocalizations.of(context).getText(
-                                        's3vy1f05' /* Reactivar */,
+                                      SlidableAction(
+                                        label:
+                                            FFLocalizations.of(context).getText(
+                                          's3vy1f05' /* Reactivar */,
+                                        ),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                        icon: Icons.restore,
+                                        onPressed: (_) async {
+                                          await UsersTable().update(
+                                            data: {
+                                              'activo': true,
+                                            },
+                                            matchingRows: (rows) =>
+                                                rows.eqOrNull(
+                                              'id',
+                                              usuariosUsersRowList
+                                                  .elementAtOrNull(
+                                                      usuarios3Index)
+                                                  ?.id,
+                                            ),
+                                          );
+                                          safeSetState(() =>
+                                              _model.requestCompleter = null);
+                                          await _model
+                                              .waitForRequestCompleted();
+                                        },
                                       ),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                      icon: Icons.restore,
-                                      onPressed: (_) async {
-                                        await UsersTable().update(
-                                          data: {
-                                            'activo': true,
-                                          },
-                                          matchingRows: (rows) => rows.eqOrNull(
-                                            'id',
-                                            usuariosUsersRowList
-                                                .elementAtOrNull(us3Index)
-                                                ?.id,
-                                          ),
-                                        );
-                                        safeSetState(() =>
-                                            _model.requestCompleter = null);
-                                        await _model.waitForRequestCompleted();
-                                      },
-                                    ),
-                                  ],
-                                ),
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: ListTile(
-                                    title: Text(
-                                      '${usuariosUsersRowList.elementAtOrNull(us3Index)?.nombre} (${usuariosUsersRowList.elementAtOrNull(us3Index)?.rol})',
-                                      style: FlutterFlowTheme.of(context)
-                                          .titleLarge
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    subtitle: Text(
-                                      valueOrDefault<String>(
-                                        us3Item.email,
-                                        'No email',
+                                    ],
+                                  ),
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      title: Text(
+                                        '${usuariosUsersRowList.elementAtOrNull(usuarios3Index)?.nombre} (${usuariosUsersRowList.elementAtOrNull(usuarios3Index)?.rol})',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            letterSpacing: 0.0,
-                                          ),
-                                    ),
-                                    trailing: Icon(
-                                      Icons.swipe_left,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 24.0,
-                                    ),
-                                    tileColor: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    dense: false,
-                                    contentPadding:
-                                        EdgeInsetsDirectional.fromSTEB(
-                                            12.0, 0.0, 12.0, 0.0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      subtitle: Text(
+                                        valueOrDefault<String>(
+                                          usuarios3Item.email,
+                                          'No email',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      trailing: Icon(
+                                        Icons.swipe_left,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
+                                      contentPadding:
+                                          EdgeInsetsDirectional.fromSTEB(
+                                              12.0, 0.0, 12.0, 0.0),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
                                     ),
                                   ),
                                 ),

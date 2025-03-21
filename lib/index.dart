@@ -7,7 +7,6 @@ export '/pages/paginas/admin_exclusivo/crear_modif_usuarios/crear_modif_usuarios
     show CrearModifUsuariosWidget;
 export '/pages/paginas/no_admin/perfil_profe/perfil_profe_widget.dart'
     show PerfilProfeWidget;
-export '/pages/paginas/no_admin/ajustes/ajustes_widget.dart' show AjustesWidget;
 export '/pages/paginas/admin_exclusivo/panel_control/panel_control_widget.dart'
     show PanelControlWidget;
 export '/pages/paginas/admin_exclusivo/usuarios/usuarios_widget.dart'

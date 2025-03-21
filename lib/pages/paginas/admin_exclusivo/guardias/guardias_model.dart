@@ -34,6 +34,8 @@ class GuardiasModel extends FlutterFlowModel<GuardiasWidget> {
   List<UsersRow>? nom4;
   // Stores action output result for [Backend Call - Query Rows] action in IconButton widget.
   List<AulasRow>? clase4;
+  // Stores action output result for [Backend Call - Query Rows] action in IconButton widget.
+  List<UsersRow>? usuario;
 
   @override
   void initState(BuildContext context) {}

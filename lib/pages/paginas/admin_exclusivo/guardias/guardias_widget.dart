@@ -1,3 +1,4 @@
+import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -101,7 +102,19 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.pushNamed(PanelControlWidget.routeName);
+                  _model.usuario = await UsersTable().queryRows(
+                    queryFn: (q) => q.eqOrNull(
+                      'id_tabla',
+                      currentUserUid,
+                    ),
+                  );
+                  if (_model.usuario?.firstOrNull?.rol == 'Admin') {
+                    context.pushNamed(PanelControlWidget.routeName);
+                  } else {
+                    context.pushNamed(InicioWidget.routeName);
+                  }
+
+                  safeSetState(() {});
                 },
               ),
               title: Text(
@@ -251,7 +264,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                     child: Builder(
                                       builder: (context) {
                                         final hor = guardiasGuardiasRowList
-                                            .unique((e) => e.idProfesor!)
+                                            .map((e) => e)
                                             .toList();
 
                                         return ListView.builder(
@@ -521,7 +534,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                                                   dia: horItem.dia,
                                                                                   profesor: _model.nom?.firstOrNull?.nombre,
                                                                                   aula: _model.clase?.firstOrNull?.codAula,
-                                                                                  index: horIndex,
+                                                                                  index: horItem.id,
                                                                                 ),
                                                                               ),
                                                                             );
@@ -787,15 +800,11 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                                 FutureBuilder<
                                                                     List<
                                                                         HorarioRow>>(
-                                                                  future: FFAppState()
-                                                                      .horarios(
-                                                                    requestFn: () =>
-                                                                        HorarioTable()
-                                                                            .queryRows(
-                                                                      queryFn:
-                                                                          (q) =>
-                                                                              q,
-                                                                    ),
+                                                                  future: HorarioTable()
+                                                                      .queryRows(
+                                                                    queryFn:
+                                                                        (q) =>
+                                                                            q,
                                                                   ),
                                                                   builder: (context,
                                                                       snapshot) {
@@ -917,8 +926,9 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                         0.0, 12.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
-                                        final hor =
-                                            guardiasGuardiasRowList.toList();
+                                        final hor = guardiasGuardiasRowList
+                                            .map((e) => e)
+                                            .toList();
 
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
@@ -945,7 +955,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.095,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1188,7 +1198,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                                                   dia: horItem.dia,
                                                                                   profesor: _model.nom1?.firstOrNull?.nombre,
                                                                                   aula: _model.clase1?.firstOrNull?.codAula,
-                                                                                  index: horIndex,
+                                                                                  index: horItem.id,
                                                                                 ),
                                                                               ),
                                                                             );
@@ -1275,7 +1285,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.09,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1305,136 +1315,252 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              FutureBuilder<
-                                                                  List<
-                                                                      UsersRow>>(
-                                                                future: UsersTable()
-                                                                    .querySingleRow(
-                                                                  queryFn: (q) =>
-                                                                      q.eqOrNull(
-                                                                    'id',
-                                                                    horItem
-                                                                        .idProfesor,
-                                                                  ),
-                                                                ),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return Center(
-                                                                      child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            50.0,
-                                                                        height:
-                                                                            50.0,
-                                                                        child:
-                                                                            SpinKitFoldingCube(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          size:
-                                                                              50.0,
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                                  List<UsersRow>
-                                                                      textUsersRowList =
-                                                                      snapshot
-                                                                          .data!;
-
-                                                                  final textUsersRow = textUsersRowList
-                                                                          .isNotEmpty
-                                                                      ? textUsersRowList
-                                                                          .first
-                                                                      : null;
-
-                                                                  return Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      textUsersRow
-                                                                          ?.nombre,
-                                                                      'Paquito',
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        UsersRow>>(
+                                                                  future: UsersTable()
+                                                                      .querySingleRow(
+                                                                    queryFn: (q) =>
+                                                                        q.eqOrNull(
+                                                                      'id',
+                                                                      horItem
+                                                                          .idProfesor,
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .headlineSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Readex Pro',
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
-                                                                  );
-                                                                },
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
-                                                                child: Card(
-                                                                  clipBehavior:
-                                                                      Clip.antiAliasWithSaveLayer,
-                                                                  color: horItem
-                                                                          .activa!
-                                                                      ? Color(
-                                                                          0xFF4B9AF0)
-                                                                      : FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .accent3,
-                                                                  elevation:
-                                                                      0.0,
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
                                                                   ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            4.0,
-                                                                            8.0,
-                                                                            4.0),
-                                                                    child: Text(
-                                                                      horItem.activa!
-                                                                          ? 'Asignada'
-                                                                          : 'No asignada',
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<UsersRow>
+                                                                        textUsersRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    final textUsersRow = textUsersRowList
+                                                                            .isNotEmpty
+                                                                        ? textUsersRowList
+                                                                            .first
+                                                                        : null;
+
+                                                                    return Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        textUsersRow
+                                                                            ?.nombre,
+                                                                        'No está asignada',
+                                                                      ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyMedium
+                                                                          .headlineSmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Inter',
-                                                                            color: horItem.activa!
-                                                                                ? FlutterFlowTheme.of(context).secondary
-                                                                                : FlutterFlowTheme.of(context).tertiary,
+                                                                                'Readex Pro',
                                                                             letterSpacing:
                                                                                 0.0,
                                                                           ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                  child: Card(
+                                                                    clipBehavior:
+                                                                        Clip.antiAliasWithSaveLayer,
+                                                                    color: horItem
+                                                                            .activa!
+                                                                        ? Color(
+                                                                            0xFF4B9AF0)
+                                                                        : FlutterFlowTheme.of(context)
+                                                                            .accent3,
+                                                                    elevation:
+                                                                        0.0,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          8.0,
+                                                                          4.0,
+                                                                          8.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        horItem.activa!
+                                                                            ? 'Asignada'
+                                                                            : 'No asignada',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: horItem.activa! ? FlutterFlowTheme.of(context).secondary : FlutterFlowTheme.of(context).tertiary,
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0,
+                                                                          5.0),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'x6s8obnf' /* Posibles asignaciones: */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Inter',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        HorarioRow>>(
+                                                                  future: HorarioTable()
+                                                                      .queryRows(
+                                                                    queryFn:
+                                                                        (q) =>
+                                                                            q,
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<HorarioRow>
+                                                                        rowHorarioRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    return SingleChildScrollView(
+                                                                      scrollDirection:
+                                                                          Axis.horizontal,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: List.generate(
+                                                                            rowHorarioRowList.length,
+                                                                            (rowIndex) {
+                                                                          final rowHorarioRow =
+                                                                              rowHorarioRowList[rowIndex];
+                                                                          return Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              FutureBuilder<List<UsersRow>>(
+                                                                                future: UsersTable().querySingleRow(
+                                                                                  queryFn: (q) => q.eqOrNull(
+                                                                                    'id',
+                                                                                    horItem.idProfesor,
+                                                                                  ),
+                                                                                ),
+                                                                                builder: (context, snapshot) {
+                                                                                  // Customize what your widget looks like when it's loading.
+                                                                                  if (!snapshot.hasData) {
+                                                                                    return Center(
+                                                                                      child: SizedBox(
+                                                                                        width: 50.0,
+                                                                                        height: 50.0,
+                                                                                        child: SpinKitFoldingCube(
+                                                                                          color: FlutterFlowTheme.of(context).primary,
+                                                                                          size: 50.0,
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  }
+                                                                                  List<UsersRow> textUsersRowList = snapshot.data!;
+
+                                                                                  final textUsersRow = textUsersRowList.isNotEmpty ? textUsersRowList.first : null;
+
+                                                                                  return Text(
+                                                                                    '${(rowHorarioRow.hora != horItem.hora) && !horItem.activa! && textUsersRow!.activo! ? valueOrDefault<String>(
+                                                                                        textUsersRow.nombre,
+                                                                                        'No se puede asignar',
+                                                                                      ) : ''} ',
+                                                                                    textAlign: TextAlign.start,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        }),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                           Icon(
                                                             Icons.swipe_rounded,
@@ -1465,8 +1591,9 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                         0.0, 12.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
-                                        final hor =
-                                            guardiasGuardiasRowList.toList();
+                                        final hor = guardiasGuardiasRowList
+                                            .map((e) => e)
+                                            .toList();
 
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
@@ -1493,7 +1620,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.095,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1736,7 +1863,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                                                   dia: horItem.dia,
                                                                                   profesor: _model.nom2?.firstOrNull?.nombre,
                                                                                   aula: _model.clase2?.firstOrNull?.codAula,
-                                                                                  index: horIndex,
+                                                                                  index: horItem.id,
                                                                                 ),
                                                                               ),
                                                                             );
@@ -1823,7 +1950,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.09,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -1853,136 +1980,252 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              FutureBuilder<
-                                                                  List<
-                                                                      UsersRow>>(
-                                                                future: UsersTable()
-                                                                    .querySingleRow(
-                                                                  queryFn: (q) =>
-                                                                      q.eqOrNull(
-                                                                    'id',
-                                                                    horItem
-                                                                        .idProfesor,
-                                                                  ),
-                                                                ),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return Center(
-                                                                      child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            50.0,
-                                                                        height:
-                                                                            50.0,
-                                                                        child:
-                                                                            SpinKitFoldingCube(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          size:
-                                                                              50.0,
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                                  List<UsersRow>
-                                                                      textUsersRowList =
-                                                                      snapshot
-                                                                          .data!;
-
-                                                                  final textUsersRow = textUsersRowList
-                                                                          .isNotEmpty
-                                                                      ? textUsersRowList
-                                                                          .first
-                                                                      : null;
-
-                                                                  return Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      textUsersRow
-                                                                          ?.nombre,
-                                                                      'Paquito',
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        UsersRow>>(
+                                                                  future: UsersTable()
+                                                                      .querySingleRow(
+                                                                    queryFn: (q) =>
+                                                                        q.eqOrNull(
+                                                                      'id',
+                                                                      horItem
+                                                                          .idProfesor,
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .headlineSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Readex Pro',
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
-                                                                  );
-                                                                },
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
-                                                                child: Card(
-                                                                  clipBehavior:
-                                                                      Clip.antiAliasWithSaveLayer,
-                                                                  color: horItem
-                                                                          .activa!
-                                                                      ? Color(
-                                                                          0xFF4B9AF0)
-                                                                      : FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .accent3,
-                                                                  elevation:
-                                                                      0.0,
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
                                                                   ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            4.0,
-                                                                            8.0,
-                                                                            4.0),
-                                                                    child: Text(
-                                                                      horItem.activa!
-                                                                          ? 'Asignada'
-                                                                          : 'No asignada',
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<UsersRow>
+                                                                        textUsersRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    final textUsersRow = textUsersRowList
+                                                                            .isNotEmpty
+                                                                        ? textUsersRowList
+                                                                            .first
+                                                                        : null;
+
+                                                                    return Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        textUsersRow
+                                                                            ?.nombre,
+                                                                        'No está asignada',
+                                                                      ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyMedium
+                                                                          .headlineSmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Inter',
-                                                                            color: horItem.activa!
-                                                                                ? FlutterFlowTheme.of(context).secondary
-                                                                                : FlutterFlowTheme.of(context).tertiary,
+                                                                                'Readex Pro',
                                                                             letterSpacing:
                                                                                 0.0,
                                                                           ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                  child: Card(
+                                                                    clipBehavior:
+                                                                        Clip.antiAliasWithSaveLayer,
+                                                                    color: horItem
+                                                                            .activa!
+                                                                        ? Color(
+                                                                            0xFF4B9AF0)
+                                                                        : FlutterFlowTheme.of(context)
+                                                                            .accent3,
+                                                                    elevation:
+                                                                        0.0,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          8.0,
+                                                                          4.0,
+                                                                          8.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        horItem.activa!
+                                                                            ? 'Asignada'
+                                                                            : 'No asignada',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: horItem.activa! ? FlutterFlowTheme.of(context).secondary : FlutterFlowTheme.of(context).tertiary,
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0,
+                                                                          5.0),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '5y4v94h3' /* Posibles asignaciones: */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Inter',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        HorarioRow>>(
+                                                                  future: HorarioTable()
+                                                                      .queryRows(
+                                                                    queryFn:
+                                                                        (q) =>
+                                                                            q,
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<HorarioRow>
+                                                                        rowHorarioRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    return SingleChildScrollView(
+                                                                      scrollDirection:
+                                                                          Axis.horizontal,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: List.generate(
+                                                                            rowHorarioRowList.length,
+                                                                            (rowIndex) {
+                                                                          final rowHorarioRow =
+                                                                              rowHorarioRowList[rowIndex];
+                                                                          return Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              FutureBuilder<List<UsersRow>>(
+                                                                                future: UsersTable().querySingleRow(
+                                                                                  queryFn: (q) => q.eqOrNull(
+                                                                                    'id',
+                                                                                    horItem.idProfesor,
+                                                                                  ),
+                                                                                ),
+                                                                                builder: (context, snapshot) {
+                                                                                  // Customize what your widget looks like when it's loading.
+                                                                                  if (!snapshot.hasData) {
+                                                                                    return Center(
+                                                                                      child: SizedBox(
+                                                                                        width: 50.0,
+                                                                                        height: 50.0,
+                                                                                        child: SpinKitFoldingCube(
+                                                                                          color: FlutterFlowTheme.of(context).primary,
+                                                                                          size: 50.0,
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  }
+                                                                                  List<UsersRow> textUsersRowList = snapshot.data!;
+
+                                                                                  final textUsersRow = textUsersRowList.isNotEmpty ? textUsersRowList.first : null;
+
+                                                                                  return Text(
+                                                                                    '${(rowHorarioRow.hora != horItem.hora) && !horItem.activa! && textUsersRow!.activo! ? valueOrDefault<String>(
+                                                                                        textUsersRow.nombre,
+                                                                                        'No se puede asignar',
+                                                                                      ) : ''} ',
+                                                                                    textAlign: TextAlign.start,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        }),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                           Icon(
                                                             Icons.swipe_rounded,
@@ -2013,8 +2256,9 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                         0.0, 12.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
-                                        final hor =
-                                            guardiasGuardiasRowList.toList();
+                                        final hor = guardiasGuardiasRowList
+                                            .map((e) => e)
+                                            .toList();
 
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
@@ -2041,7 +2285,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.095,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -2284,7 +2528,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                                                   dia: horItem.dia,
                                                                                   profesor: _model.nom3?.firstOrNull?.nombre,
                                                                                   aula: _model.clase3?.firstOrNull?.codAula,
-                                                                                  index: horIndex,
+                                                                                  index: horItem.id,
                                                                                 ),
                                                                               ),
                                                                             );
@@ -2371,7 +2615,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.09,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -2401,136 +2645,252 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              FutureBuilder<
-                                                                  List<
-                                                                      UsersRow>>(
-                                                                future: UsersTable()
-                                                                    .querySingleRow(
-                                                                  queryFn: (q) =>
-                                                                      q.eqOrNull(
-                                                                    'id',
-                                                                    horItem
-                                                                        .idProfesor,
-                                                                  ),
-                                                                ),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return Center(
-                                                                      child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            50.0,
-                                                                        height:
-                                                                            50.0,
-                                                                        child:
-                                                                            SpinKitFoldingCube(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          size:
-                                                                              50.0,
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                                  List<UsersRow>
-                                                                      textUsersRowList =
-                                                                      snapshot
-                                                                          .data!;
-
-                                                                  final textUsersRow = textUsersRowList
-                                                                          .isNotEmpty
-                                                                      ? textUsersRowList
-                                                                          .first
-                                                                      : null;
-
-                                                                  return Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      textUsersRow
-                                                                          ?.nombre,
-                                                                      'Paquito',
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        UsersRow>>(
+                                                                  future: UsersTable()
+                                                                      .querySingleRow(
+                                                                    queryFn: (q) =>
+                                                                        q.eqOrNull(
+                                                                      'id',
+                                                                      horItem
+                                                                          .idProfesor,
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .headlineSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Readex Pro',
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
-                                                                  );
-                                                                },
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
-                                                                child: Card(
-                                                                  clipBehavior:
-                                                                      Clip.antiAliasWithSaveLayer,
-                                                                  color: horItem
-                                                                          .activa!
-                                                                      ? Color(
-                                                                          0xFF4B9AF0)
-                                                                      : FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .accent3,
-                                                                  elevation:
-                                                                      0.0,
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
                                                                   ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            4.0,
-                                                                            8.0,
-                                                                            4.0),
-                                                                    child: Text(
-                                                                      horItem.activa!
-                                                                          ? 'Asignada'
-                                                                          : 'No asignada',
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<UsersRow>
+                                                                        textUsersRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    final textUsersRow = textUsersRowList
+                                                                            .isNotEmpty
+                                                                        ? textUsersRowList
+                                                                            .first
+                                                                        : null;
+
+                                                                    return Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        textUsersRow
+                                                                            ?.nombre,
+                                                                        'No está asignada',
+                                                                      ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyMedium
+                                                                          .headlineSmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Inter',
-                                                                            color: horItem.activa!
-                                                                                ? FlutterFlowTheme.of(context).secondary
-                                                                                : FlutterFlowTheme.of(context).tertiary,
+                                                                                'Readex Pro',
                                                                             letterSpacing:
                                                                                 0.0,
                                                                           ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                  child: Card(
+                                                                    clipBehavior:
+                                                                        Clip.antiAliasWithSaveLayer,
+                                                                    color: horItem
+                                                                            .activa!
+                                                                        ? Color(
+                                                                            0xFF4B9AF0)
+                                                                        : FlutterFlowTheme.of(context)
+                                                                            .accent3,
+                                                                    elevation:
+                                                                        0.0,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          8.0,
+                                                                          4.0,
+                                                                          8.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        horItem.activa!
+                                                                            ? 'Asignada'
+                                                                            : 'No asignada',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: horItem.activa! ? FlutterFlowTheme.of(context).secondary : FlutterFlowTheme.of(context).tertiary,
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0,
+                                                                          5.0),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '3r12hefe' /* Posibles asignaciones: */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Inter',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        HorarioRow>>(
+                                                                  future: HorarioTable()
+                                                                      .queryRows(
+                                                                    queryFn:
+                                                                        (q) =>
+                                                                            q,
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<HorarioRow>
+                                                                        rowHorarioRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    return SingleChildScrollView(
+                                                                      scrollDirection:
+                                                                          Axis.horizontal,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: List.generate(
+                                                                            rowHorarioRowList.length,
+                                                                            (rowIndex) {
+                                                                          final rowHorarioRow =
+                                                                              rowHorarioRowList[rowIndex];
+                                                                          return Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              FutureBuilder<List<UsersRow>>(
+                                                                                future: UsersTable().querySingleRow(
+                                                                                  queryFn: (q) => q.eqOrNull(
+                                                                                    'id',
+                                                                                    horItem.idProfesor,
+                                                                                  ),
+                                                                                ),
+                                                                                builder: (context, snapshot) {
+                                                                                  // Customize what your widget looks like when it's loading.
+                                                                                  if (!snapshot.hasData) {
+                                                                                    return Center(
+                                                                                      child: SizedBox(
+                                                                                        width: 50.0,
+                                                                                        height: 50.0,
+                                                                                        child: SpinKitFoldingCube(
+                                                                                          color: FlutterFlowTheme.of(context).primary,
+                                                                                          size: 50.0,
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  }
+                                                                                  List<UsersRow> textUsersRowList = snapshot.data!;
+
+                                                                                  final textUsersRow = textUsersRowList.isNotEmpty ? textUsersRowList.first : null;
+
+                                                                                  return Text(
+                                                                                    '${(rowHorarioRow.hora != horItem.hora) && !horItem.activa! && textUsersRow!.activo! ? valueOrDefault<String>(
+                                                                                        textUsersRow.nombre,
+                                                                                        'No se puede asignar',
+                                                                                      ) : ''} ',
+                                                                                    textAlign: TextAlign.start,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        }),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                           Icon(
                                                             Icons.swipe_rounded,
@@ -2561,8 +2921,9 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                         0.0, 12.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
-                                        final hor =
-                                            guardiasGuardiasRowList.toList();
+                                        final hor = guardiasGuardiasRowList
+                                            .map((e) => e)
+                                            .toList();
 
                                         return ListView.builder(
                                           padding: EdgeInsets.zero,
@@ -2589,7 +2950,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.095,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -2832,7 +3193,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                                                   dia: horItem.dia,
                                                                                   profesor: _model.nom4?.firstOrNull?.nombre,
                                                                                   aula: _model.clase4?.firstOrNull?.codAula,
-                                                                                  index: horIndex,
+                                                                                  index: horItem.id,
                                                                                 ),
                                                                               ),
                                                                             );
@@ -2919,7 +3280,7 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
-                                                        0.09,
+                                                        0.2,
                                                     decoration: BoxDecoration(
                                                       color: FlutterFlowTheme
                                                               .of(context)
@@ -2949,136 +3310,252 @@ class _GuardiasWidgetState extends State<GuardiasWidget>
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              FutureBuilder<
-                                                                  List<
-                                                                      UsersRow>>(
-                                                                future: UsersTable()
-                                                                    .querySingleRow(
-                                                                  queryFn: (q) =>
-                                                                      q.eqOrNull(
-                                                                    'id',
-                                                                    horItem
-                                                                        .idProfesor,
-                                                                  ),
-                                                                ),
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return Center(
-                                                                      child:
-                                                                          SizedBox(
-                                                                        width:
-                                                                            50.0,
-                                                                        height:
-                                                                            50.0,
-                                                                        child:
-                                                                            SpinKitFoldingCube(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).primary,
-                                                                          size:
-                                                                              50.0,
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                                  List<UsersRow>
-                                                                      textUsersRowList =
-                                                                      snapshot
-                                                                          .data!;
-
-                                                                  final textUsersRow = textUsersRowList
-                                                                          .isNotEmpty
-                                                                      ? textUsersRowList
-                                                                          .first
-                                                                      : null;
-
-                                                                  return Text(
-                                                                    valueOrDefault<
-                                                                        String>(
-                                                                      textUsersRow
-                                                                          ?.nombre,
-                                                                      'Paquito',
+                                                          Expanded(
+                                                            child: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        UsersRow>>(
+                                                                  future: UsersTable()
+                                                                      .querySingleRow(
+                                                                    queryFn: (q) =>
+                                                                        q.eqOrNull(
+                                                                      'id',
+                                                                      horItem
+                                                                          .idProfesor,
                                                                     ),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .headlineSmall
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Readex Pro',
-                                                                          letterSpacing:
-                                                                              0.0,
-                                                                        ),
-                                                                  );
-                                                                },
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            8.0,
-                                                                            0.0),
-                                                                child: Card(
-                                                                  clipBehavior:
-                                                                      Clip.antiAliasWithSaveLayer,
-                                                                  color: horItem
-                                                                          .activa!
-                                                                      ? Color(
-                                                                          0xFF4B9AF0)
-                                                                      : FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .accent3,
-                                                                  elevation:
-                                                                      0.0,
-                                                                  shape:
-                                                                      RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            8.0),
                                                                   ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8.0,
-                                                                            4.0,
-                                                                            8.0,
-                                                                            4.0),
-                                                                    child: Text(
-                                                                      horItem.activa!
-                                                                          ? 'Asignada'
-                                                                          : 'No asignada',
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<UsersRow>
+                                                                        textUsersRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    final textUsersRow = textUsersRowList
+                                                                            .isNotEmpty
+                                                                        ? textUsersRowList
+                                                                            .first
+                                                                        : null;
+
+                                                                    return Text(
+                                                                      valueOrDefault<
+                                                                          String>(
+                                                                        textUsersRow
+                                                                            ?.nombre,
+                                                                        'No está asignada',
+                                                                      ),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .bodyMedium
+                                                                          .headlineSmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                'Inter',
-                                                                            color: horItem.activa!
-                                                                                ? FlutterFlowTheme.of(context).secondary
-                                                                                : FlutterFlowTheme.of(context).tertiary,
+                                                                                'Readex Pro',
                                                                             letterSpacing:
                                                                                 0.0,
                                                                           ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          8.0,
+                                                                          0.0),
+                                                                  child: Card(
+                                                                    clipBehavior:
+                                                                        Clip.antiAliasWithSaveLayer,
+                                                                    color: horItem
+                                                                            .activa!
+                                                                        ? Color(
+                                                                            0xFF4B9AF0)
+                                                                        : FlutterFlowTheme.of(context)
+                                                                            .accent3,
+                                                                    elevation:
+                                                                        0.0,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              8.0),
+                                                                    ),
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          8.0,
+                                                                          4.0,
+                                                                          8.0,
+                                                                          4.0),
+                                                                      child:
+                                                                          Text(
+                                                                        horItem.activa!
+                                                                            ? 'Asignada'
+                                                                            : 'No asignada',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: horItem.activa! ? FlutterFlowTheme.of(context).secondary : FlutterFlowTheme.of(context).tertiary,
+                                                                              letterSpacing: 0.0,
+                                                                            ),
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          0.0,
+                                                                          5.0),
+                                                                  child: Text(
+                                                                    FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'waitwdvp' /* Posibles asignaciones: */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Inter',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                                FutureBuilder<
+                                                                    List<
+                                                                        HorarioRow>>(
+                                                                  future: HorarioTable()
+                                                                      .queryRows(
+                                                                    queryFn:
+                                                                        (q) =>
+                                                                            q,
+                                                                  ),
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return Center(
+                                                                        child:
+                                                                            SizedBox(
+                                                                          width:
+                                                                              50.0,
+                                                                          height:
+                                                                              50.0,
+                                                                          child:
+                                                                              SpinKitFoldingCube(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).primary,
+                                                                            size:
+                                                                                50.0,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    }
+                                                                    List<HorarioRow>
+                                                                        rowHorarioRowList =
+                                                                        snapshot
+                                                                            .data!;
+
+                                                                    return SingleChildScrollView(
+                                                                      scrollDirection:
+                                                                          Axis.horizontal,
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.max,
+                                                                        children: List.generate(
+                                                                            rowHorarioRowList.length,
+                                                                            (rowIndex) {
+                                                                          final rowHorarioRow =
+                                                                              rowHorarioRowList[rowIndex];
+                                                                          return Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              FutureBuilder<List<UsersRow>>(
+                                                                                future: UsersTable().querySingleRow(
+                                                                                  queryFn: (q) => q.eqOrNull(
+                                                                                    'id',
+                                                                                    horItem.idProfesor,
+                                                                                  ),
+                                                                                ),
+                                                                                builder: (context, snapshot) {
+                                                                                  // Customize what your widget looks like when it's loading.
+                                                                                  if (!snapshot.hasData) {
+                                                                                    return Center(
+                                                                                      child: SizedBox(
+                                                                                        width: 50.0,
+                                                                                        height: 50.0,
+                                                                                        child: SpinKitFoldingCube(
+                                                                                          color: FlutterFlowTheme.of(context).primary,
+                                                                                          size: 50.0,
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                  }
+                                                                                  List<UsersRow> textUsersRowList = snapshot.data!;
+
+                                                                                  final textUsersRow = textUsersRowList.isNotEmpty ? textUsersRowList.first : null;
+
+                                                                                  return Text(
+                                                                                    '${(rowHorarioRow.hora != horItem.hora) && !horItem.activa! && textUsersRow!.activo! ? valueOrDefault<String>(
+                                                                                        textUsersRow.nombre,
+                                                                                        'No se puede asignar',
+                                                                                      ) : ''} ',
+                                                                                    textAlign: TextAlign.start,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Inter',
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  );
+                                                                                },
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        }),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                           Icon(
                                                             Icons.swipe_rounded,

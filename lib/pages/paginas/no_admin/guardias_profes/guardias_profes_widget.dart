@@ -10,6 +10,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'guardias_profes_model.dart';
 export 'guardias_profes_model.dart';
 
@@ -76,6 +77,8 @@ class _GuardiasProfesWidgetState extends State<GuardiasProfesWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return FutureBuilder<List<GuardiasRow>>(
       future: (_model.requestCompleter ??= Completer<List<GuardiasRow>>()
             ..complete(GuardiasTable().queryRows(
@@ -439,37 +442,15 @@ class _GuardiasProfesWidgetState extends State<GuardiasProfesWidget>
                                                         onTap: () async {
                                                           var _shouldSetState =
                                                               false;
-                                                          _model.yaAsignado =
-                                                              await GuardiasTable()
-                                                                  .queryRows(
-                                                            queryFn: (q) => q
-                                                                .eqOrNull(
-                                                                  'id_profesor',
-                                                                  containerUsersRow
-                                                                      ?.id,
-                                                                )
-                                                                .eqOrNull(
-                                                                  'hora',
-                                                                  guardItem
-                                                                      .hora,
-                                                                )
-                                                                .eqOrNull(
-                                                                  'dia',
-                                                                  guardItem.dia,
-                                                                ),
-                                                          );
-                                                          _shouldSetState =
-                                                              true;
-                                                          if (_model.yaAsignado !=
-                                                                  null &&
-                                                              (_model.yaAsignado)!
-                                                                  .isNotEmpty) {
+                                                          if (containerUsersRow
+                                                                  ?.numGuardias ==
+                                                              6.0) {
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
                                                               SnackBar(
                                                                 content: Text(
-                                                                  'Ya se ha asignado en este tramo horario',
+                                                                  'No te puedes asignar a más guardias',
                                                                   style:
                                                                       TextStyle(
                                                                     color: FlutterFlowTheme.of(
@@ -491,39 +472,38 @@ class _GuardiasProfesWidgetState extends State<GuardiasProfesWidget>
                                                                   () {});
                                                             return;
                                                           } else {
-                                                            _model.hora2 =
-                                                                await UsersTable()
+                                                            _model.yaAsignado =
+                                                                await GuardiasTable()
                                                                     .queryRows(
-                                                              queryFn: (q) =>
-                                                                  q.order(
-                                                                      'num_guardias',
-                                                                      ascending:
-                                                                          true),
+                                                              queryFn: (q) => q
+                                                                  .eqOrNull(
+                                                                    'id_profesor',
+                                                                    containerUsersRow
+                                                                        ?.id,
+                                                                  )
+                                                                  .eqOrNull(
+                                                                    'hora',
+                                                                    guardItem
+                                                                        .hora,
+                                                                  )
+                                                                  .eqOrNull(
+                                                                    'dia',
+                                                                    guardItem
+                                                                        .dia,
+                                                                  ),
                                                             );
                                                             _shouldSetState =
                                                                 true;
-                                                            if (functions
-                                                                    .dosconcincohoras(_model
-                                                                        .hora2!
-                                                                        .firstOrNull!
-                                                                        .numGuardias!)
-                                                                    .toString() ==
-                                                                formatNumber(
-                                                                  containerUsersRow
-                                                                      ?.numGuardias,
-                                                                  formatType:
-                                                                      FormatType
-                                                                          .decimal,
-                                                                  decimalType:
-                                                                      DecimalType
-                                                                          .automatic,
-                                                                )) {
+                                                            if (_model.yaAsignado !=
+                                                                    null &&
+                                                                (_model.yaAsignado)!
+                                                                    .isNotEmpty) {
                                                               ScaffoldMessenger
                                                                       .of(context)
                                                                   .showSnackBar(
                                                                 SnackBar(
                                                                   content: Text(
-                                                                    'Demasiadas guardias hechas',
+                                                                    'Ya se ha asignado en este tramo horario',
                                                                     style:
                                                                         TextStyle(
                                                                       color: FlutterFlowTheme.of(
@@ -545,87 +525,39 @@ class _GuardiasProfesWidgetState extends State<GuardiasProfesWidget>
                                                                     () {});
                                                               return;
                                                             } else {
-                                                              _model.adeu =
-                                                                  await HorarioTable()
+                                                              _model.hora2 =
+                                                                  await UsersTable()
                                                                       .queryRows(
-                                                                queryFn: (q) => q
-                                                                    .eqOrNull(
-                                                                      'profesor',
-                                                                      containerUsersRow
-                                                                          ?.id,
-                                                                    )
-                                                                    .eqOrNull(
-                                                                      'dia',
-                                                                      guardItem
-                                                                          .dia,
-                                                                    )
-                                                                    .eqOrNull(
-                                                                      'hora',
-                                                                      guardItem
-                                                                          .hora,
-                                                                    ),
+                                                                queryFn: (q) => q.order(
+                                                                    'num_guardias',
+                                                                    ascending:
+                                                                        true),
                                                               );
                                                               _shouldSetState =
                                                                   true;
-                                                              if (!(_model.adeu !=
-                                                                      null &&
-                                                                  (_model.adeu)!
-                                                                      .isNotEmpty)) {
+                                                              if (functions
+                                                                      .dosconcincohoras(_model
+                                                                          .hora2!
+                                                                          .firstOrNull!
+                                                                          .numGuardias!)
+                                                                      .toString() ==
+                                                                  formatNumber(
+                                                                    containerUsersRow
+                                                                        ?.numGuardias,
+                                                                    formatType:
+                                                                        FormatType
+                                                                            .decimal,
+                                                                    decimalType:
+                                                                        DecimalType
+                                                                            .automatic,
+                                                                  )) {
                                                                 ScaffoldMessenger.of(
                                                                         context)
                                                                     .showSnackBar(
                                                                   SnackBar(
                                                                     content:
                                                                         Text(
-                                                                      'Guardia apuntada',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
-                                                                      ),
-                                                                    ),
-                                                                    duration: Duration(
-                                                                        milliseconds:
-                                                                            4000),
-                                                                    backgroundColor:
-                                                                        FlutterFlowTheme.of(context)
-                                                                            .success,
-                                                                  ),
-                                                                );
-                                                                await GuardiasTable()
-                                                                    .update(
-                                                                  data: {
-                                                                    'id_profesor':
-                                                                        containerUsersRow
-                                                                            ?.id,
-                                                                    'activa':
-                                                                        true,
-                                                                  },
-                                                                  matchingRows:
-                                                                      (rows) =>
-                                                                          rows.eqOrNull(
-                                                                    'id',
-                                                                    guardItem
-                                                                        .id,
-                                                                  ),
-                                                                );
-                                                                safeSetState(() =>
-                                                                    _model.requestCompleter =
-                                                                        null);
-                                                                await _model
-                                                                    .waitForRequestCompleted();
-                                                                if (_shouldSetState)
-                                                                  safeSetState(
-                                                                      () {});
-                                                                return;
-                                                              } else {
-                                                                ScaffoldMessenger.of(
-                                                                        context)
-                                                                    .showSnackBar(
-                                                                  SnackBar(
-                                                                    content:
-                                                                        Text(
-                                                                      'No puede asignarse, tiene clase a esa hora.',
+                                                                      'Demasiadas guardias hechas',
                                                                       style:
                                                                           TextStyle(
                                                                         color: FlutterFlowTheme.of(context)
@@ -640,6 +572,133 @@ class _GuardiasProfesWidgetState extends State<GuardiasProfesWidget>
                                                                             .error,
                                                                   ),
                                                                 );
+                                                                if (_shouldSetState)
+                                                                  safeSetState(
+                                                                      () {});
+                                                                return;
+                                                              } else {
+                                                                _model.adeu =
+                                                                    await HorarioTable()
+                                                                        .queryRows(
+                                                                  queryFn: (q) => q
+                                                                      .eqOrNull(
+                                                                        'profesor',
+                                                                        containerUsersRow
+                                                                            ?.id,
+                                                                      )
+                                                                      .eqOrNull(
+                                                                        'dia',
+                                                                        guardItem
+                                                                            .dia,
+                                                                      )
+                                                                      .eqOrNull(
+                                                                        'hora',
+                                                                        guardItem
+                                                                            .hora,
+                                                                      ),
+                                                                );
+                                                                _shouldSetState =
+                                                                    true;
+                                                                if (!(_model.adeu !=
+                                                                        null &&
+                                                                    (_model.adeu)!
+                                                                        .isNotEmpty)) {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'Guardia apuntada',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .success,
+                                                                    ),
+                                                                  );
+                                                                  FFAppState()
+                                                                          .horas =
+                                                                      FFAppState()
+                                                                              .horas +
+                                                                          1.0;
+                                                                  safeSetState(
+                                                                      () {});
+                                                                  await GuardiasTable()
+                                                                      .update(
+                                                                    data: {
+                                                                      'id_profesor':
+                                                                          containerUsersRow
+                                                                              ?.id,
+                                                                      'activa':
+                                                                          true,
+                                                                    },
+                                                                    matchingRows:
+                                                                        (rows) =>
+                                                                            rows.eqOrNull(
+                                                                      'id',
+                                                                      guardItem
+                                                                          .id,
+                                                                    ),
+                                                                  );
+                                                                  await UsersTable()
+                                                                      .update(
+                                                                    data: {
+                                                                      'num_guardias':
+                                                                          FFAppState()
+                                                                              .horas,
+                                                                    },
+                                                                    matchingRows:
+                                                                        (rows) =>
+                                                                            rows.eqOrNull(
+                                                                      'id',
+                                                                      containerUsersRow
+                                                                          ?.id,
+                                                                    ),
+                                                                  );
+                                                                  safeSetState(() =>
+                                                                      _model.requestCompleter =
+                                                                          null);
+                                                                  await _model
+                                                                      .waitForRequestCompleted();
+                                                                  if (_shouldSetState)
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  return;
+                                                                } else {
+                                                                  ScaffoldMessenger.of(
+                                                                          context)
+                                                                      .showSnackBar(
+                                                                    SnackBar(
+                                                                      content:
+                                                                          Text(
+                                                                        'No puede asignarse, tiene clase a esa hora.',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                        ),
+                                                                      ),
+                                                                      duration: Duration(
+                                                                          milliseconds:
+                                                                              4000),
+                                                                      backgroundColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .error,
+                                                                    ),
+                                                                  );
+                                                                  if (_shouldSetState)
+                                                                    safeSetState(
+                                                                        () {});
+                                                                  return;
+                                                                }
                                                               }
                                                             }
                                                           }
