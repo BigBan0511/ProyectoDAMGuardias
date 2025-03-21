@@ -186,6 +186,7 @@ Entre los principales logros del proyecto, destacamos:
 * Versión para iOS.
 * Planos de las aulas del centro donde salgan las clases ocupadas.
 * Integración con plataformas educativas como Google Classroom o Moodle.
+* Mejora del rendimiento
 
 
 
