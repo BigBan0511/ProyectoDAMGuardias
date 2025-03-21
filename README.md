@@ -160,7 +160,7 @@ La app contiene ficheros de imágen como asset y buckets en Supabase donde guard
 Despliegue en Github
 
 ## **Acciones Explicadas de Flutterflow**
-[Documentación de la BD](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Documentaci%C3%B3n%20Acciones%20Flutterflow.pdf)
+* [Documentación de la BD](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Documentaci%C3%B3n%20Acciones%20Flutterflow.pdf)
 
 ## 12. Manual de Usuario
 
