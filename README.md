@@ -58,7 +58,7 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 
 ## 5. Instalación
 
-1.  Descargar el [APK](https://github.com/BigBan0511/ProyectoDAMGuardias/releases/tag/Tag2) o la versión web [WEB](https://guardiapp.flutterflow.app/)
+1.  Descargar el [APK](https://github.com/BigBan0511/ProyectoDAMGuardias/releases/tag/Tag2) o la versión web [WEB](https://guardiapp2.flutterflow.app/)
 2.  Iniciar sesión con las credenciales proporcionadas por el administrador.
 
 ## 6. Uso
