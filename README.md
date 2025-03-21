@@ -162,7 +162,15 @@ Despliegue en Github
 ## **Acciones Explicadas de Flutterflow**
 [Documentación de la BD](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Documentaci%C3%B3n%20Acciones%20Flutterflow.pdf)
 
-## 12. Conclusiones y Futuras Mejoras 
+## 12. Manual de Usuario
+
+* [Descargar el Manual de Usuario](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Manual%20de%20Usuario%20-%20GuardiApp.pdf)
+
+## 13. Plan de Negocio
+
+* [Plan de Negocio](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Plan%20de%20negocio.pdf)
+
+## 14. Conclusiones y Futuras Mejoras 
 **Conclusiones**
 <br>
 El desarrollo de GuardiApp ha permitido la creación de una herramienta eficiente para la gestión de guardias en el instituto, optimizando la comunicación entre profesores y mejorando la organización interna.
@@ -179,10 +187,6 @@ Entre los principales logros del proyecto, destacamos:
 * Planos de las aulas del centro donde salgan las clases ocupadas.
 * Integración con plataformas educativas como Google Classroom o Moodle.
 
-## 13. Manual de Usuario
 
-* [Descargar el Manual de Usuario](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Manual%20de%20Usuario%20-%20GuardiApp.pdf)
 
-## 14. Plan de Negocio
 
-* [Plan de Negocio](https://github.com/BigBan0511/ProyectoDAMGuardias/blob/main/Plan%20de%20negocio.pdf)
