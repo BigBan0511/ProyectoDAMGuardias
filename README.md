@@ -49,7 +49,7 @@ Este programa intenta simplificar y automatizar la gestión de horas de guardia 
 * **Profesor:** Gestiona tareas en sus guardias y se asigna guardias disponibles.
 * **Sala de Profesores:** Visualiza el estado de las guardias y profesores disponibles.
 
-## 4. Requisitos (ni puta idea jaja)
+## 4. Requisitos
 
 * Versión de Kotlin --> 1.8.22
 * SDK mínimo --> 23
